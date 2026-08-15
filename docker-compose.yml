@@ -1,0 +1,71 @@
+# spec 004 §2 — the deployed stack: web and api only.
+#
+# Postgres is deliberately absent: deployment uses Supabase, and shipping a
+# second database would invite drift between what is tested and what runs.
+# For a local database see docker-compose.dev.yml.
+#
+#   docker compose --env-file .env up -d --build
+#
+# The root .env is the single source of truth (§2.2) — the same file feeds
+# compose here and dotenv inside both apps.
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      args:
+        ENV: ${ENV:-production}
+    image: strongroom/api:${SENTRY_RELEASE:-latest}
+    restart: unless-stopped
+    # §2.4 — bound to loopback; nginx is the only thing that reaches it.
+    ports:
+      - '127.0.0.1:3401:3401'
+    environment:
+      ENV: ${ENV:-production}
+      NODE_ENV: production
+      API_PORT: '3401'
+      DATABASE_URL: ${DATABASE_URL}
+      DIRECT_URL: ${DIRECT_URL:-}
+      JWT_SECRET: ${JWT_SECRET}
+      WEB_URL: ${WEB_URL}
+      API_PUBLIC_URL: ${API_PUBLIC_URL}
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+      SUPABASE_BUCKET: ${SUPABASE_BUCKET:-dataroom}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      GOOGLE_CALLBACK_URL: ${GOOGLE_CALLBACK_URL:-}
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-production}
+      SENTRY_TRACES_SAMPLE_RATE: ${SENTRY_TRACES_SAMPLE_RATE:-0.1}
+      POSTHOG_KEY: ${POSTHOG_KEY:-}
+      POSTHOG_HOST: ${POSTHOG_HOST:-https://eu.i.posthog.com}
+      SEED_ON_START: ${SEED_ON_START:-false}
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        # §2.3 — these are baked into the client bundle. Passing them only as
+        # `environment` below would build an image pointing at the wrong API.
+        ENV: ${ENV:-production}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-/api/v1}
+        NEXT_PUBLIC_SENTRY_DSN: ${NEXT_PUBLIC_SENTRY_DSN:-}
+        NEXT_PUBLIC_SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-production}
+        NEXT_PUBLIC_POSTHOG_KEY: ${NEXT_PUBLIC_POSTHOG_KEY:-}
+        NEXT_PUBLIC_POSTHOG_HOST: ${NEXT_PUBLIC_POSTHOG_HOST:-https://eu.i.posthog.com}
+    image: strongroom/web:${SENTRY_RELEASE:-latest}
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - '127.0.0.1:3400:3400'
+    environment:
+      ENV: ${ENV:-production}
+      NODE_ENV: production
+      PORT: '3400'

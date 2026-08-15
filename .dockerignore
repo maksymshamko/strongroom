@@ -1,0 +1,15 @@
+node_modules
+**/node_modules
+**/dist
+**/.next
+**/test-results
+**/playwright-report
+.git
+.github
+cd
+specs
+plans
+*.md
+.env
+.env.local
+**/*.tsbuildinfo

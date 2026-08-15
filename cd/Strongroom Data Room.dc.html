@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>
+  html, body { margin: 0; padding: 0; background: #efeff0; }
+  body { font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif; color: #18181b; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  * { box-sizing: border-box; }
+  a { color: #3d3a4f; text-decoration: none; }
+  a:hover { color: #2b293a; text-decoration: underline; }
+</style>
+</helmet>
+
+<div style="display:flex;flex-direction:column;background:#f7f7f8">
+
+<section style="padding:80px 64px 64px;display:flex;flex-direction:column;gap:40px;background:#fff;border-bottom:1px solid #e8e8ea">
+  <div style="display:flex;flex-direction:column;gap:16px;max-width:720px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.14em;color:#8e8e96">STRONGROOM · UI SYSTEM · V1</span>
+    <h1 style="margin:0;font-size:38px;font-weight:500;letter-spacing:-.02em;line-height:1.15">Virtual data room</h1>
+    <p style="margin:0;font-size:15px;line-height:1.6;color:#5c5c63">Secure document repository for M&amp;A due diligence. Nineteen frames across nine areas, sharing one spacing, type and status system. Built for React + Tailwind + shadcn/ui — every control here maps to a Radix primitive.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:48px">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">SURFACE &amp; INK</span>
+      <div style="display:flex;gap:10px">
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="width:64px;height:64px;background:#f7f7f8;border:1px solid #e8e8ea;border-radius:4px"></div><span style="font:400 10px/1 Helvetica,Arial,sans-serif;color:#8e8e96">canvas</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="width:64px;height:64px;background:#fff;border:1px solid #e8e8ea;border-radius:4px"></div><span style="font:400 10px/1 Helvetica,Arial,sans-serif;color:#8e8e96">surface</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="width:64px;height:64px;background:#e8e8ea;border-radius:4px"></div><span style="font:400 10px/1 Helvetica,Arial,sans-serif;color:#8e8e96">line</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="width:64px;height:64px;background:#5c5c63;border-radius:4px"></div><span style="font:400 10px/1 Helvetica,Arial,sans-serif;color:#8e8e96">ink-2</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="width:64px;height:64px;background:#18181b;border-radius:4px"></div><span style="font:400 10px/1 Helvetica,Arial,sans-serif;color:#8e8e96">ink-1</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">ACCENT &amp; STATUS</span>
+      <div style="display:flex;gap:10px">
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="width:64px;height:64px;background:#3d3a4f;border-radius:4px"></div><span style="font:400 10px/1 Helvetica,Arial,sans-serif;color:#8e8e96">accent</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="width:64px;height:64px;background:#2f6b4f;border-radius:4px"></div><span style="font:400 10px/1 Helvetica,Arial,sans-serif;color:#8e8e96">done</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="width:64px;height:64px;background:#8a5a12;border-radius:4px"></div><span style="font:400 10px/1 Helvetica,Arial,sans-serif;color:#8e8e96">pending</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="width:64px;height:64px;background:#c0392b;border-radius:4px"></div><span style="font:400 10px/1 Helvetica,Arial,sans-serif;color:#8e8e96">danger</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">TYPE SCALE</span>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:20px;font-weight:500;letter-spacing:-.01em;line-height:1">20 / 500 — screen title</span>
+        <span style="font-size:14px;font-weight:500;line-height:1">14 / 500 — row primary</span>
+        <span style="font-size:13px;line-height:1;color:#5c5c63">13 / 400 — row meta, body</span>
+        <span style="font:400 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.08em;color:#8e8e96">11 CAPS / .09EM — LABELS, SIZES, DATES</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">RULES</span>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:12.5px;color:#5c5c63;line-height:1.5">
+        <span>4px base grid · 8px radius · 10px on dialogs</span>
+        <span>44px list rows — density where it counts</span>
+        <span>Accent is action only; never decoration</span>
+        <span>Red appears only where data is destroyed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:56px 64px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">01 — DASHBOARD</span>
+    <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em">Data rooms</h2>
+    <p style="margin:0;font-size:13px;color:#5c5c63;max-width:560px">Rooms as cards, not a table — few enough to scan, each one a deal. The empty state doubles as onboarding and surfaces pre-account shares so a new invitee never lands on nothing.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">1.1 — POPULATED</span></sc-if>
+      <div style="width:1280px;height:800px;background:#fff;border:1px solid #e2e2e5;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06);display:flex">
+        <div style="width:232px;flex:none;background:#fafafa;border-right:1px solid #e8e8ea;display:flex;flex-direction:column;padding:20px 0">
+          <div style="padding:0 20px 24px;display:flex;align-items:center;gap:10px">
+            <div style="width:24px;height:24px;background:#3d3a4f;border-radius:5px"></div>
+            <span style="font:500 13px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em">STRONGROOM</span>
+          </div>
+          <div style="padding:0 12px;display:flex;flex-direction:column;gap:2px">
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:6px;background:#f0eff4;font-size:13.5px;font-weight:500;color:#3d3a4f"><div style="width:14px;height:11px;background:#3d3a4f;border-radius:2px"></div>Data rooms</div>
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:6px;font-size:13.5px;color:#5c5c63"><div style="width:14px;height:11px;border:1.5px solid #8e8e96;border-radius:2px"></div>Shared with me</div>
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:6px;font-size:13.5px;color:#5c5c63"><div style="width:12px;height:12px;border:1.5px solid #8e8e96;border-radius:50%"></div>Recent</div>
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:6px;font-size:13.5px;color:#5c5c63"><div style="width:12px;height:12px;border:1.5px solid #8e8e96;border-radius:2px"></div>Trash</div>
+          </div>
+          <div style="margin-top:auto;padding:16px 20px 0;border-top:1px solid #e8e8ea;display:flex;align-items:center;gap:10px">
+            <div style="width:28px;height:28px;border-radius:50%;background:#e2e2e5;display:flex;align-items:center;justify-content:center;font:500 11px/1 Helvetica,Arial,sans-serif;color:#5c5c63">AR</div>
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+              <span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Anna Ruiz</span>
+              <span style="font:400 10.5px/1 Helvetica,Arial,sans-serif;color:#8e8e96">Harlan &amp; Co.</span>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+          <div style="height:60px;flex:none;border-bottom:1px solid #e8e8ea;display:flex;align-items:center;justify-content:space-between;padding:0 28px">
+            <span style="font-size:15px;font-weight:500">Data rooms</span>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="display:flex;align-items:center;gap:8px;height:32px;width:260px;padding:0 10px;border:1px solid #e2e2e5;border-radius:6px;background:#fff">
+                <div style="width:11px;height:11px;border:1.5px solid #8e8e96;border-radius:50%"></div>
+                <span style="font-size:13px;color:#8e8e96">Search all rooms</span>
+              </div>
+              <div style="height:32px;padding:0 14px;background:#3d3a4f;border-radius:6px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">New data room</div>
+            </div>
+          </div>
+          <div style="flex:1;padding:28px;display:flex;flex-direction:column;gap:20px;background:#fafafa">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">4 ROOMS</span>
+              <div style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5c5c63">Sorted by <span style="font-weight:500;color:#18181b">Last updated</span></div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:16px;box-shadow:0 1px 2px rgba(24,24,27,.05)">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between">
+                  <div style="width:32px;height:26px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:4px;position:relative"><div style="position:absolute;top:-4px;left:5px;width:12px;height:4px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+                  <span style="font:500 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.08em;padding:5px 7px;border-radius:3px;background:#f0eff4;color:#3d3a4f">ACTIVE</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <span style="font-size:15px;font-weight:500;letter-spacing:-.005em">Project Meridian</span>
+                  <span style="font-size:12.5px;color:#5c5c63">Acquisition · Sell-side</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #f0f0f2">
+                  <span style="font:400 11px/1 Helvetica,Arial,sans-serif;color:#8e8e96">348 ITEMS · 12 FOLDERS</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <div style="display:flex;align-items:center">
+                    <div style="width:22px;height:22px;border-radius:50%;background:#e2e2e5;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#5c5c63">AR</div>
+                    <div style="width:22px;height:22px;border-radius:50%;background:#e6e4ea;border:2px solid #fff;margin-left:-6px;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#5c5c63">JT</div>
+                    <div style="width:22px;height:22px;border-radius:50%;background:#e0e2e6;border:2px solid #fff;margin-left:-6px;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#5c5c63">+7</div>
+                  </div>
+                  <span style="font-size:12px;color:#8e8e96">Updated 14 min ago</span>
+                </div>
+              </div>
+
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:16px;box-shadow:0 1px 2px rgba(24,24,27,.05)">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between">
+                  <div style="width:32px;height:26px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:4px;position:relative"><div style="position:absolute;top:-4px;left:5px;width:12px;height:4px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+                  <span style="font:500 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.08em;padding:5px 7px;border-radius:3px;background:#f0eff4;color:#3d3a4f">ACTIVE</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <span style="font-size:15px;font-weight:500;letter-spacing:-.005em">Northgate Carve-out</span>
+                  <span style="font-size:12.5px;color:#5c5c63">Divestiture · Sell-side</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #f0f0f2">
+                  <span style="font:400 11px/1 Helvetica,Arial,sans-serif;color:#8e8e96">1,204 ITEMS · 31 FOLDERS</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <div style="display:flex;align-items:center">
+                    <div style="width:22px;height:22px;border-radius:50%;background:#e2e2e5;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#5c5c63">AR</div>
+                    <div style="width:22px;height:22px;border-radius:50%;background:#e0e2e6;border:2px solid #fff;margin-left:-6px;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#5c5c63">+22</div>
+                  </div>
+                  <span style="font-size:12px;color:#8e8e96">Updated 2 hours ago</span>
+                </div>
+              </div>
+
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:16px;box-shadow:0 1px 2px rgba(24,24,27,.05)">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between">
+                  <div style="width:32px;height:26px;background:#f4f4f5;border:1px solid #e2e2e5;border-radius:4px;position:relative"><div style="position:absolute;top:-4px;left:5px;width:12px;height:4px;background:#e2e2e5;border-radius:2px 2px 0 0"></div></div>
+                  <span style="font:500 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.08em;padding:5px 7px;border-radius:3px;background:#fdf6e8;color:#8a5a12">DILIGENCE</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <span style="font-size:15px;font-weight:500;letter-spacing:-.005em">Kestrel Holdings</span>
+                  <span style="font-size:12.5px;color:#5c5c63">Acquisition · Buy-side</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #f0f0f2">
+                  <span style="font:400 11px/1 Helvetica,Arial,sans-serif;color:#8e8e96">86 ITEMS · 5 FOLDERS</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <div style="display:flex;align-items:center">
+                    <div style="width:22px;height:22px;border-radius:50%;background:#e6e4ea;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#5c5c63">MO</div>
+                    <div style="width:22px;height:22px;border-radius:50%;background:#e2e2e5;border:2px solid #fff;margin-left:-6px;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#5c5c63">AR</div>
+                  </div>
+                  <span style="font-size:12px;color:#8e8e96">Updated yesterday</span>
+                </div>
+              </div>
+
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:16px;box-shadow:0 1px 2px rgba(24,24,27,.05);opacity:.72">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between">
+                  <div style="width:32px;height:26px;background:#f4f4f5;border:1px solid #e2e2e5;border-radius:4px;position:relative"><div style="position:absolute;top:-4px;left:5px;width:12px;height:4px;background:#e2e2e5;border-radius:2px 2px 0 0"></div></div>
+                  <span style="font:500 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.08em;padding:5px 7px;border-radius:3px;background:#f4f4f5;color:#5c5c63">CLOSED</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <span style="font-size:15px;font-weight:500;letter-spacing:-.005em">Bellweather Series C</span>
+                  <span style="font-size:12.5px;color:#5c5c63">Financing · Sell-side</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #f0f0f2">
+                  <span style="font:400 11px/1 Helvetica,Arial,sans-serif;color:#8e8e96">512 ITEMS · 18 FOLDERS</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <span style="font:400 11px/1 Helvetica,Arial,sans-serif;color:#8e8e96">ACCESS REVOKED</span>
+                  <span style="font-size:12px;color:#8e8e96">Closed 3 Mar 2026</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ annotations }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;max-width:1280px;font-size:12.5px;line-height:1.55;color:#5c5c63"><span style="font:500 11px Helvetica,Arial,sans-serif;color:#c0392b">NOTE</span>&nbsp;&nbsp;Status chip carries deal stage, not file state. Closed rooms stay visible at 72% opacity — an audit trail matters more than a tidy grid.</p>
+      </sc-if>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">1.2 — EMPTY ACCOUNT + PRE-ACCOUNT SHARES</span></sc-if>
+      <div style="width:1280px;height:800px;background:#fff;border:1px solid #e2e2e5;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06);display:flex">
+        <div style="width:232px;flex:none;background:#fafafa;border-right:1px solid #e8e8ea;display:flex;flex-direction:column;padding:20px 0">
+          <div style="padding:0 20px 24px;display:flex;align-items:center;gap:10px">
+            <div style="width:24px;height:24px;background:#3d3a4f;border-radius:5px"></div>
+            <span style="font:500 13px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em">STRONGROOM</span>
+          </div>
+          <div style="padding:0 12px;display:flex;flex-direction:column;gap:2px">
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:6px;background:#f0eff4;font-size:13.5px;font-weight:500;color:#3d3a4f"><div style="width:14px;height:11px;background:#3d3a4f;border-radius:2px"></div>Data rooms</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 12px;border-radius:6px;font-size:13.5px;color:#5c5c63">
+              <span style="display:flex;align-items:center;gap:10px"><div style="width:14px;height:11px;border:1.5px solid #8e8e96;border-radius:2px"></div>Shared with me</span>
+              <span style="font:500 10px/1 Helvetica,Arial,sans-serif;padding:3px 5px;border-radius:3px;background:#f0eff4;color:#3d3a4f">3</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:6px;font-size:13.5px;color:#8e8e96"><div style="width:12px;height:12px;border:1.5px solid #d4d4d8;border-radius:50%"></div>Recent</div>
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:6px;font-size:13.5px;color:#8e8e96"><div style="width:12px;height:12px;border:1.5px solid #d4d4d8;border-radius:2px"></div>Trash</div>
+          </div>
+          <div style="margin-top:auto;padding:16px 20px 0;border-top:1px solid #e8e8ea;display:flex;align-items:center;gap:10px">
+            <div style="width:28px;height:28px;border-radius:50%;background:#e2e2e5;display:flex;align-items:center;justify-content:center;font:500 11px/1 Helvetica,Arial,sans-serif;color:#5c5c63">MO</div>
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+              <span style="font-size:12.5px;font-weight:500">Marcus Oyelaran</span>
+              <span style="font:400 10.5px/1 Helvetica,Arial,sans-serif;color:#8e8e96">NEW ACCOUNT</span>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+          <div style="height:60px;flex:none;border-bottom:1px solid #e8e8ea;display:flex;align-items:center;justify-content:space-between;padding:0 28px">
+            <span style="font-size:15px;font-weight:500">Data rooms</span>
+            <div style="height:32px;padding:0 14px;background:#3d3a4f;border-radius:6px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">New data room</div>
+          </div>
+          <div style="flex:1;padding:28px;display:flex;flex-direction:column;gap:32px;background:#fafafa;overflow:hidden">
+
+            <div style="border:1px dashed #d4d4d8;border-radius:8px;background:#fff;padding:56px 40px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center">
+              <div style="width:44px;height:36px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:5px;position:relative"><div style="position:absolute;top:-5px;left:7px;width:16px;height:5px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+              <div style="display:flex;flex-direction:column;gap:8px;max-width:420px">
+                <span style="font-size:17px;font-weight:500;letter-spacing:-.01em">No data rooms yet</span>
+                <span style="font-size:13.5px;line-height:1.55;color:#5c5c63">A data room is one deal: a folder tree, a permission list, and an audit log. Create one to start uploading diligence material.</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:4px">
+                <div style="height:34px;padding:0 16px;background:#3d3a4f;border-radius:6px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Create data room</div>
+                <div style="height:34px;padding:0 16px;border:1px solid #e2e2e5;border-radius:6px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#18181b;background:#fff">Import a folder</div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between">
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">SHARED WITH YOU · 3 ITEMS</span>
+                  <span style="font-size:12.5px;color:#5c5c63">Sent to marcus@oyelaran.co before you created this account. Now linked to it.</span>
+                </div>
+                <span style="font-size:12.5px;font-weight:500;color:#3d3a4f">View all</span>
+              </div>
+              <div style="border:1px solid #e2e2e5;border-radius:8px;background:#fff;overflow:hidden">
+                <div style="display:grid;grid-template-columns:32px 1fr 200px 150px 92px;align-items:center;gap:16px;height:38px;padding:0 18px;border-bottom:1px solid #e8e8ea;background:#fafafa;font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.08em;color:#8e8e96">
+                  <span></span><span>NAME</span><span>SHARED BY</span><span>SHARED</span><span>ACCESS</span>
+                </div>
+                <div style="display:grid;grid-template-columns:32px 1fr 200px 150px 92px;align-items:center;gap:16px;height:48px;padding:0 18px;border-bottom:1px solid #f0f0f2">
+                  <div style="width:26px;height:22px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px;position:relative"><div style="position:absolute;top:-3px;left:4px;width:10px;height:3px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+                  <span style="font-size:13.5px;font-weight:500">Kestrel Holdings — Diligence</span>
+                  <span style="font-size:13px;color:#5c5c63">anna@harlanco.com</span>
+                  <span style="font:400 11.5px/1 Helvetica,Arial,sans-serif;color:#8e8e96">11 AUG 2026</span>
+                  <span style="font:500 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.06em;padding:4px 6px;border-radius:3px;background:#f4f4f5;color:#5c5c63;justify-self:start">VIEW</span>
+                </div>
+                <div style="display:grid;grid-template-columns:32px 1fr 200px 150px 92px;align-items:center;gap:16px;height:48px;padding:0 18px;border-bottom:1px solid #f0f0f2">
+                  <div style="width:26px;height:22px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 7.5px/1 Helvetica,Arial,sans-serif;color:#c0392b">PDF</div>
+                  <span style="font-size:13.5px;font-weight:500">Kestrel_CIM_v4.pdf</span>
+                  <span style="font-size:13px;color:#5c5c63">anna@harlanco.com</span>
+                  <span style="font:400 11.5px/1 Helvetica,Arial,sans-serif;color:#8e8e96">11 AUG 2026</span>
+                  <span style="font:500 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.06em;padding:4px 6px;border-radius:3px;background:#f4f4f5;color:#5c5c63;justify-self:start">VIEW</span>
+                </div>
+                <div style="display:grid;grid-template-columns:32px 1fr 200px 150px 92px;align-items:center;gap:16px;height:48px;padding:0 18px">
+                  <div style="width:26px;height:22px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 7.5px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div>
+                  <span style="font-size:13.5px;font-weight:500">Kestrel_QoE_model.xlsx</span>
+                  <span style="font-size:13px;color:#5c5c63">j.tran@meridianadv.com</span>
+                  <span style="font:400 11.5px/1 Helvetica,Arial,sans-serif;color:#8e8e96">28 JUL 2026</span>
+                  <span style="font:500 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.06em;padding:4px 6px;border-radius:3px;background:#f0eff4;color:#3d3a4f;justify-self:start">EDIT</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ annotations }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;max-width:1280px;font-size:12.5px;line-height:1.55;color:#5c5c63"><span style="font:500 11px Helvetica,Arial,sans-serif;color:#c0392b">NOTE</span>&nbsp;&nbsp;Shares that predate the account are matched on verified email at signup and listed as a table, not cards — they are individual items, not deals the user owns.</p>
+      </sc-if>
+    </div>
+
+  </div>
+</section>
+
+</div>
+
+<section style="padding:56px 64px;display:flex;flex-direction:column;gap:28px;border-top:1px solid #e8e8ea">
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">02 — FOLDER BROWSER</span>
+    <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em">Inside a data room</h2>
+    <p style="margin:0;font-size:13px;color:#5c5c63;max-width:560px">List is the default: 44px rows, four metadata columns, folders sorted above files. Grid exists for visual material — decks, site photos, scanned exhibits. Breadcrumbs are the only navigation; no infinite sidebar tree.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">2.1 — LIST VIEW</span></sc-if>
+      <div style="width:1280px;height:800px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06);display:flex">
+        <div style="width:232px;flex:none;background:#fafafa;border-right:1px solid #e8e8ea;display:flex;flex-direction:column;padding:20px 0">
+          <div style="padding:0 20px 20px;display:flex;align-items:center;gap:10px">
+            <div style="width:24px;height:24px;background:#3d3a4f;border-radius:6px"></div>
+            <span style="font:500 13px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em">STRONGROOM</span>
+          </div>
+          <div style="padding:0 20px 12px;display:flex;flex-direction:column;gap:6px">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">CURRENT ROOM</span>
+            <div style="display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 10px;border:1px solid #e2e2e5;border-radius:8px;background:#fff">
+              <span style="font-size:13px;font-weight:500">Project Meridian</span>
+              <span style="color:#8e8e96;font-size:11px">▾</span>
+            </div>
+          </div>
+          <div style="padding:8px 12px 0;display:flex;flex-direction:column;gap:2px">
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:8px;background:#f0eff4;font-size:13.5px;font-weight:500;color:#3d3a4f"><div style="width:14px;height:11px;background:#3d3a4f;border-radius:2px"></div>All documents</div>
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:8px;font-size:13.5px;color:#5c5c63"><div style="width:12px;height:12px;border:1.5px solid #8e8e96;border-radius:50%"></div>Recent</div>
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:8px;font-size:13.5px;color:#5c5c63"><div style="width:12px;height:12px;border:1.5px solid #8e8e96;border-radius:2px"></div>People &amp; access</div>
+            <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;border-radius:8px;font-size:13.5px;color:#5c5c63"><div style="width:12px;height:12px;border:1.5px solid #8e8e96;border-radius:2px"></div>Audit log</div>
+          </div>
+          <div style="margin-top:auto;padding:16px 20px 0;border-top:1px solid #e8e8ea;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:#8e8e96"><span>Storage</span><span>18.4 / 50 GB</span></div>
+            <div style="height:4px;border-radius:2px;background:#e8e8ea;overflow:hidden"><div style="width:37%;height:100%;background:#3d3a4f"></div></div>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+          <div style="height:56px;flex:none;border-bottom:1px solid #e8e8ea;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#5c5c63">
+              <span style="color:#5c5c63">Project Meridian</span>
+              <span style="color:#c9c9cf">/</span>
+              <span style="color:#5c5c63">02 Financials</span>
+              <span style="color:#c9c9cf">/</span>
+              <span style="font-weight:500;color:#18181b">Audited Statements</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="display:flex;align-items:center;gap:8px;height:32px;width:220px;padding:0 10px;border:1px solid #e2e2e5;border-radius:8px">
+                <div style="width:11px;height:11px;border:1.5px solid #8e8e96;border-radius:50%"></div>
+                <span style="font-size:13px;color:#8e8e96">Search this room</span>
+              </div>
+              <div style="display:flex;border:1px solid #e2e2e5;border-radius:8px;overflow:hidden;height:32px">
+                <div style="width:34px;display:flex;align-items:center;justify-content:center;background:#f0eff4;border-right:1px solid #e2e2e5"><div style="display:flex;flex-direction:column;gap:2px"><div style="width:12px;height:2px;background:#3d3a4f"></div><div style="width:12px;height:2px;background:#3d3a4f"></div><div style="width:12px;height:2px;background:#3d3a4f"></div></div></div>
+                <div style="width:34px;display:flex;align-items:center;justify-content:center;background:#fff"><div style="display:grid;grid-template-columns:1fr 1fr;gap:2px"><div style="width:5px;height:5px;background:#8e8e96"></div><div style="width:5px;height:5px;background:#8e8e96"></div><div style="width:5px;height:5px;background:#8e8e96"></div><div style="width:5px;height:5px;background:#8e8e96"></div></div></div>
+              </div>
+              <div style="height:32px;padding:0 12px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500">New folder</div>
+              <div style="height:32px;padding:0 14px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Upload</div>
+            </div>
+          </div>
+
+          <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid #e8e8ea;background:#fafafa">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="height:26px;padding:0 10px;border:1px solid #e2e2e5;border-radius:6px;background:#fff;display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5c5c63">Type <span style="color:#8e8e96">▾</span></div>
+              <div style="height:26px;padding:0 10px;border:1px solid #e2e2e5;border-radius:6px;background:#fff;display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5c5c63">Size <span style="color:#8e8e96">▾</span></div>
+              <div style="height:26px;padding:0 10px;border:1px solid #e2e2e5;border-radius:6px;background:#fff;display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5c5c63">Modified <span style="color:#8e8e96">▾</span></div>
+            </div>
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96">3 FOLDERS · 6 FILES · 41.8 MB</span>
+          </div>
+
+          <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:34px;padding:0 24px;border-bottom:1px solid #e8e8ea;font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96">
+              <div style="width:14px;height:14px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <span></span><span>NAME</span><span>SIZE</span><span>MODIFIED</span><span>UPLOADED BY</span><span></span>
+            </div>
+
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2">
+              <div style="width:14px;height:14px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <div style="width:22px;height:18px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px;position:relative"><div style="position:absolute;top:-3px;left:3px;width:9px;height:3px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+              <span style="font-size:13.5px;font-weight:500">FY2023</span>
+              <span style="font-size:12.5px;color:#8e8e96">12 items</span>
+              <span style="font-size:12.5px;color:#5c5c63">4 Aug 2026</span>
+              <span style="font-size:12.5px;color:#5c5c63">Anna Ruiz</span>
+              <span style="color:#c9c9cf;font-size:14px;text-align:center">⋯</span>
+            </div>
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2">
+              <div style="width:14px;height:14px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <div style="width:22px;height:18px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px;position:relative"><div style="position:absolute;top:-3px;left:3px;width:9px;height:3px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+              <span style="font-size:13.5px;font-weight:500">FY2024</span>
+              <span style="font-size:12.5px;color:#8e8e96">14 items</span>
+              <span style="font-size:12.5px;color:#5c5c63">4 Aug 2026</span>
+              <span style="font-size:12.5px;color:#5c5c63">Anna Ruiz</span>
+              <span style="color:#c9c9cf;font-size:14px;text-align:center">⋯</span>
+            </div>
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2;background:#f0eff4">
+              <div style="width:14px;height:14px;border:1.5px solid #3d3a4f;border-radius:3px;background:#3d3a4f;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px">✓</div>
+              <div style="width:22px;height:18px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px;position:relative"><div style="position:absolute;top:-3px;left:3px;width:9px;height:3px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+              <span style="font-size:13.5px;font-weight:500">FY2025 — Draft</span>
+              <span style="font-size:12.5px;color:#8e8e96">9 items</span>
+              <span style="font-size:12.5px;color:#5c5c63">Today, 09:14</span>
+              <span style="font-size:12.5px;color:#5c5c63">Anna Ruiz</span>
+              <span style="color:#5c5c63;font-size:14px;text-align:center">⋯</span>
+            </div>
+
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2">
+              <div style="width:14px;height:14px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#c0392b">PDF</div>
+              <span style="font-size:13.5px;font-weight:500">FY25_Audited_Financials.pdf</span>
+              <span style="font-size:12.5px;color:#5c5c63">4.2 MB</span>
+              <span style="font-size:12.5px;color:#5c5c63">Today, 09:12</span>
+              <span style="font-size:12.5px;color:#5c5c63">Anna Ruiz</span>
+              <span style="color:#c9c9cf;font-size:14px;text-align:center">⋯</span>
+            </div>
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2">
+              <div style="width:14px;height:14px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#c0392b">PDF</div>
+              <span style="display:flex;align-items:center;gap:8px"><span style="font-size:13.5px;font-weight:500">QoE_Report_Draft_v3.pdf</span><span style="font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.07em;padding:3px 5px;border-radius:3px;background:#f0eff4;color:#3d3a4f">SHARED</span></span>
+              <span style="font-size:12.5px;color:#5c5c63">11.6 MB</span>
+              <span style="font-size:12.5px;color:#5c5c63">Yesterday</span>
+              <span style="font-size:12.5px;color:#5c5c63">J. Tran</span>
+              <span style="color:#c9c9cf;font-size:14px;text-align:center">⋯</span>
+            </div>
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2">
+              <div style="width:14px;height:14px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div>
+              <span style="font-size:13.5px;font-weight:500">Revenue_by_Cohort.xlsx</span>
+              <span style="font-size:12.5px;color:#5c5c63">880 KB</span>
+              <span style="font-size:12.5px;color:#5c5c63">12 Aug 2026</span>
+              <span style="font-size:12.5px;color:#5c5c63">J. Tran</span>
+              <span style="color:#c9c9cf;font-size:14px;text-align:center">⋯</span>
+            </div>
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2">
+              <div style="width:14px;height:14px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div>
+              <span style="font-size:13.5px;font-weight:500">Debt_Schedule.xlsx</span>
+              <span style="font-size:12.5px;color:#5c5c63">1.1 MB</span>
+              <span style="font-size:12.5px;color:#5c5c63">12 Aug 2026</span>
+              <span style="font-size:12.5px;color:#5c5c63">Anna Ruiz</span>
+              <span style="color:#c9c9cf;font-size:14px;text-align:center">⋯</span>
+            </div>
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2">
+              <div style="width:14px;height:14px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div>
+              <span style="font-size:13.5px;font-weight:500">Working_Capital_Bridge.xlsx</span>
+              <span style="font-size:12.5px;color:#5c5c63">640 KB</span>
+              <span style="font-size:12.5px;color:#5c5c63">9 Aug 2026</span>
+              <span style="font-size:12.5px;color:#5c5c63">M. Oyelaran</span>
+              <span style="color:#c9c9cf;font-size:14px;text-align:center">⋯</span>
+            </div>
+            <div style="display:grid;grid-template-columns:22px 30px 1fr 96px 128px 176px 32px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2">
+              <div style="width:14px;height:14px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#5c5c63">CSV</div>
+              <span style="font-size:13.5px;font-weight:500">AP_Aging_Jul26.csv</span>
+              <span style="font-size:12.5px;color:#5c5c63">212 KB</span>
+              <span style="font-size:12.5px;color:#5c5c63">2 Aug 2026</span>
+              <span style="font-size:12.5px;color:#5c5c63">M. Oyelaran</span>
+              <span style="color:#c9c9cf;font-size:14px;text-align:center">⋯</span>
+            </div>
+          </div>
+
+          <div style="height:48px;flex:none;border-top:1px solid #e8e8ea;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 24px;box-shadow:0 -1px 3px rgba(24,24,27,.04)">
+            <span style="font-size:13px;font-weight:500">1 item selected</span>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="height:30px;padding:0 12px;border:1px solid #e2e2e5;border-radius:6px;display:flex;align-items:center;font-size:12.5px;font-weight:500">Download</div>
+              <div style="height:30px;padding:0 12px;border:1px solid #e2e2e5;border-radius:6px;display:flex;align-items:center;font-size:12.5px;font-weight:500">Move</div>
+              <div style="height:30px;padding:0 12px;border:1px solid #e2e2e5;border-radius:6px;display:flex;align-items:center;font-size:12.5px;font-weight:500">Rename</div>
+              <div style="height:30px;padding:0 12px;border:1px solid #e2e2e5;border-radius:6px;display:flex;align-items:center;font-size:12.5px;font-weight:500">Share</div>
+              <div style="height:30px;padding:0 12px;border:1px solid #f0d8d4;border-radius:6px;display:flex;align-items:center;font-size:12.5px;font-weight:500;color:#c0392b">Delete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ annotations }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;max-width:1280px;font-size:12.5px;line-height:1.55;color:#5c5c63"><span style="font:500 11px Helvetica,Arial,sans-serif;letter-spacing:.06em;color:#c0392b">NOTE</span>&nbsp;&nbsp;“Uploaded by” is a column, not a hover detail — in diligence, provenance is primary metadata. Selection replaces the filter bar's right side with a bottom action bar so row layout never shifts.</p>
+      </sc-if>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">2.2 — GRID VIEW</span></sc-if>
+      <div style="width:1280px;height:800px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06);display:flex;flex-direction:column">
+        <div style="height:56px;flex:none;border-bottom:1px solid #e8e8ea;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#5c5c63">
+            <span>Project Meridian</span><span style="color:#c9c9cf">/</span><span style="font-weight:500;color:#18181b">04 Commercial</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="display:flex;border:1px solid #e2e2e5;border-radius:8px;overflow:hidden;height:32px">
+              <div style="width:34px;display:flex;align-items:center;justify-content:center;background:#fff;border-right:1px solid #e2e2e5"><div style="display:flex;flex-direction:column;gap:2px"><div style="width:12px;height:2px;background:#8e8e96"></div><div style="width:12px;height:2px;background:#8e8e96"></div><div style="width:12px;height:2px;background:#8e8e96"></div></div></div>
+              <div style="width:34px;display:flex;align-items:center;justify-content:center;background:#f0eff4"><div style="display:grid;grid-template-columns:1fr 1fr;gap:2px"><div style="width:5px;height:5px;background:#3d3a4f"></div><div style="width:5px;height:5px;background:#3d3a4f"></div><div style="width:5px;height:5px;background:#3d3a4f"></div><div style="width:5px;height:5px;background:#3d3a4f"></div></div></div>
+            </div>
+            <div style="height:32px;padding:0 12px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500">New folder</div>
+            <div style="height:32px;padding:0 14px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Upload</div>
+          </div>
+        </div>
+        <div style="flex:1;padding:24px;display:flex;flex-direction:column;gap:22px;background:#fafafa;overflow:hidden">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96">FOLDERS · 3</span>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:14px">
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 2px rgba(24,24,27,.04)">
+                <div style="width:30px;height:24px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:4px;position:relative"><div style="position:absolute;top:-4px;left:5px;width:11px;height:4px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+                <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:13px;font-weight:500">Customer Contracts</span><span style="font-size:11.5px;color:#8e8e96">42 items</span></div>
+              </div>
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 2px rgba(24,24,27,.04)">
+                <div style="width:30px;height:24px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:4px;position:relative"><div style="position:absolute;top:-4px;left:5px;width:11px;height:4px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+                <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:13px;font-weight:500">Pipeline Reviews</span><span style="font-size:11.5px;color:#8e8e96">9 items</span></div>
+              </div>
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 2px rgba(24,24,27,.04)">
+                <div style="width:30px;height:24px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:4px;position:relative"><div style="position:absolute;top:-4px;left:5px;width:11px;height:4px;background:#d8d5e1;border-radius:2px 2px 0 0"></div></div>
+                <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:13px;font-weight:500">Market Studies</span><span style="font-size:11.5px;color:#8e8e96">6 items</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96">FILES · 10</span>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:14px">
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(24,24,27,.04)">
+                <div style="height:112px;background:repeating-linear-gradient(135deg,#f4f4f5,#f4f4f5 6px,#ececee 6px,#ececee 12px);display:flex;align-items:center;justify-content:center;border-bottom:1px solid #e8e8ea"><span style="font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96">PDF PREVIEW</span></div>
+                <div style="padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Top20_Customers.pdf</span><span style="font-size:11px;color:#8e8e96">2.4 MB · 12 Aug</span></div>
+              </div>
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(24,24,27,.04)">
+                <div style="height:112px;background:repeating-linear-gradient(135deg,#f4f4f5,#f4f4f5 6px,#ececee 6px,#ececee 12px);display:flex;align-items:center;justify-content:center;border-bottom:1px solid #e8e8ea"><span style="font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96">DECK THUMB</span></div>
+                <div style="padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">MgmtPresentation.pptx</span><span style="font-size:11px;color:#8e8e96">18.9 MB · 11 Aug</span></div>
+              </div>
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(24,24,27,.04)">
+                <div style="height:112px;background:#fafafa;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #e8e8ea"><div style="width:34px;height:28px;border:1px solid #e2e2e5;border-radius:4px;background:#fff;display:flex;align-items:center;justify-content:center;font:500 8px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div></div>
+                <div style="padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cohort_Retention.xlsx</span><span style="font-size:11px;color:#8e8e96">1.2 MB · 10 Aug</span></div>
+              </div>
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(24,24,27,.04)">
+                <div style="height:112px;background:repeating-linear-gradient(135deg,#f4f4f5,#f4f4f5 6px,#ececee 6px,#ececee 12px);display:flex;align-items:center;justify-content:center;border-bottom:1px solid #e8e8ea"><span style="font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96">SITE PHOTO</span></div>
+                <div style="padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Plant_Reading_01.jpg</span><span style="font-size:11px;color:#8e8e96">6.1 MB · 8 Aug</span></div>
+              </div>
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(24,24,27,.04)">
+                <div style="height:112px;background:repeating-linear-gradient(135deg,#f4f4f5,#f4f4f5 6px,#ececee 6px,#ececee 12px);display:flex;align-items:center;justify-content:center;border-bottom:1px solid #e8e8ea"><span style="font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96">PDF PREVIEW</span></div>
+                <div style="padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Churn_Analysis.pdf</span><span style="font-size:11px;color:#8e8e96">3.3 MB · 8 Aug</span></div>
+              </div>
+              <div style="background:#fff;border:1px solid #e8e8ea;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(24,24,27,.04)">
+                <div style="height:112px;background:#fafafa;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #e8e8ea"><div style="width:34px;height:28px;border:1px solid #e2e2e5;border-radius:4px;background:#fff;display:flex;align-items:center;justify-content:center;font:500 8px/1 Helvetica,Arial,sans-serif;color:#5c5c63">DOC</div></div>
+                <div style="padding:10px 12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Reseller_Terms.docx</span><span style="font-size:11px;color:#8e8e96">96 KB · 5 Aug</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">2.3 — EMPTY FOLDER</span></sc-if>
+      <div style="width:1280px;height:560px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06);display:flex;flex-direction:column">
+        <div style="height:56px;flex:none;border-bottom:1px solid #e8e8ea;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#5c5c63">
+            <span>Project Meridian</span><span style="color:#c9c9cf">/</span><span>03 Legal</span><span style="color:#c9c9cf">/</span><span style="font-weight:500;color:#18181b">Litigation</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="height:32px;padding:0 12px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500">New folder</div>
+            <div style="height:32px;padding:0 14px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Upload</div>
+          </div>
+        </div>
+        <div style="flex:1;padding:32px;display:flex">
+          <div style="flex:1;border:1.5px dashed #d4d4d8;border-radius:10px;background:#fafafa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center">
+            <div style="width:42px;height:34px;border:1.5px solid #d4d4d8;border-radius:5px;background:#fff;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px"><div style="width:14px;height:2px;background:#d4d4d8"></div></div>
+            <div style="display:flex;flex-direction:column;gap:7px;max-width:380px">
+              <span style="font-size:16px;font-weight:500;letter-spacing:-.005em">This folder is empty</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5c5c63">Drag files or folders here to upload. Nested folder structure is preserved.</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:2px">
+              <div style="height:34px;padding:0 16px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Select files</div>
+              <div style="height:34px;padding:0 16px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;background:#fff">New folder</div>
+            </div>
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#a8a8b0;margin-top:6px">MAX 5 GB PER FILE · AES-256 AT REST</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section style="padding:56px 64px;display:flex;flex-direction:column;gap:28px;border-top:1px solid #e8e8ea">
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">03 — UPLOAD</span>
+    <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em">Drag-and-drop and progress</h2>
+    <p style="margin:0;font-size:13px;color:#5c5c63;max-width:560px">Uploads are the highest-risk moment in a diligence workflow: a silent failure means a buyer reviews an incomplete room. Failures stay in the list until dismissed and are counted in the header.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">3.1 — DRAG OVER TARGET</span></sc-if>
+      <div style="width:900px;height:600px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06);display:flex;flex-direction:column;position:relative">
+        <div style="height:56px;flex:none;border-bottom:1px solid #e8e8ea;display:flex;align-items:center;padding:0 24px;font-size:13.5px;color:#5c5c63"><span>Project Meridian</span><span style="color:#c9c9cf;margin:0 8px">/</span><span style="font-weight:500;color:#18181b">02 Financials</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;filter:blur(1px);opacity:.5">
+          <div style="display:grid;grid-template-columns:30px 1fr 96px 128px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2"><div style="width:22px;height:18px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px"></div><span style="font-size:13.5px;font-weight:500">FY2023</span><span style="font-size:12.5px;color:#8e8e96">12 items</span><span style="font-size:12.5px;color:#5c5c63">4 Aug 2026</span></div>
+          <div style="display:grid;grid-template-columns:30px 1fr 96px 128px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2"><div style="width:22px;height:18px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px"></div><span style="font-size:13.5px;font-weight:500">FY2024</span><span style="font-size:12.5px;color:#8e8e96">14 items</span><span style="font-size:12.5px;color:#5c5c63">4 Aug 2026</span></div>
+          <div style="display:grid;grid-template-columns:30px 1fr 96px 128px;align-items:center;gap:14px;height:44px;padding:0 24px;border-bottom:1px solid #f0f0f2"><div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px"></div><span style="font-size:13.5px;font-weight:500">FY25_Audited_Financials.pdf</span><span style="font-size:12.5px;color:#5c5c63">4.2 MB</span><span style="font-size:12.5px;color:#5c5c63">Today</span></div>
+        </div>
+        <div style="position:absolute;inset:56px 0 0 0;background:rgba(61,58,79,.06);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;padding:24px">
+          <div style="flex:1;align-self:stretch;border:2px dashed #3d3a4f;border-radius:10px;background:rgba(255,255,255,.86);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center">
+            <div style="width:44px;height:36px;border:2px solid #3d3a4f;border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center"><div style="width:2px;height:16px;background:#3d3a4f"></div></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:17px;font-weight:500;color:#3d3a4f;letter-spacing:-.01em">Drop to upload into “02 Financials”</span>
+              <span style="font-size:13px;color:#5c5c63">7 files · 34.2 MB · folder structure preserved</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ annotations }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;max-width:900px;font-size:12.5px;line-height:1.55;color:#5c5c63"><span style="font:500 11px Helvetica,Arial,sans-serif;letter-spacing:.06em;color:#c0392b">NOTE</span>&nbsp;&nbsp;The overlay names the destination folder. Dropping into the wrong branch of a 1,200-item room is the expensive mistake this one line prevents.</p>
+      </sc-if>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">3.2 — UPLOAD PANEL · MIXED STATES</span></sc-if>
+      <div style="width:480px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(24,24,27,.10)">
+        <div style="padding:14px 16px;border-bottom:1px solid #e8e8ea;display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <span style="font-size:13.5px;font-weight:500">Uploading 7 files</span>
+            <span style="font-size:11.5px;color:#8e8e96">4 complete · 2 uploading · 1 failed</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:12.5px;color:#5c5c63"><span>Minimize</span><span style="color:#c9c9cf">✕</span></div>
+        </div>
+        <div style="height:3px;background:#e8e8ea"><div style="width:64%;height:100%;background:#3d3a4f"></div></div>
+        <div style="display:flex;flex-direction:column;max-height:352px;overflow:hidden">
+
+          <div style="padding:11px 16px;border-bottom:1px solid #f0f0f2;display:grid;grid-template-columns:24px 1fr 74px 18px;align-items:center;gap:12px">
+            <div style="width:20px;height:16px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6px/1 Helvetica,Arial,sans-serif;color:#c0392b">PDF</div>
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">FY25_Audited_Financials.pdf</span><span style="font-size:11px;color:#8e8e96">4.2 MB</span></div>
+            <span style="font-size:11.5px;font-weight:500;color:#2f6b4f;text-align:right">Complete</span>
+            <div style="width:16px;height:16px;border-radius:50%;background:#2f6b4f;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px">✓</div>
+          </div>
+
+          <div style="padding:11px 16px;border-bottom:1px solid #f0f0f2;display:grid;grid-template-columns:24px 1fr 74px 18px;align-items:center;gap:12px">
+            <div style="width:20px;height:16px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div>
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Debt_Schedule.xlsx</span><span style="font-size:11px;color:#8e8e96">1.1 MB</span></div>
+            <span style="font-size:11.5px;font-weight:500;color:#2f6b4f;text-align:right">Complete</span>
+            <div style="width:16px;height:16px;border-radius:50%;background:#2f6b4f;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px">✓</div>
+          </div>
+
+          <div style="padding:11px 16px;border-bottom:1px solid #f0f0f2;display:grid;grid-template-columns:24px 1fr 74px 18px;align-items:center;gap:12px">
+            <div style="width:20px;height:16px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6px/1 Helvetica,Arial,sans-serif;color:#c0392b">PDF</div>
+            <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+              <span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">MgmtPresentation_Aug26.pdf</span>
+              <div style="height:4px;border-radius:2px;background:#e8e8ea;overflow:hidden"><div style="width:68%;height:100%;background:#3d3a4f;border-radius:2px"></div></div>
+              <span style="font-size:11px;color:#8e8e96">12.9 MB of 18.9 MB · 8s left</span>
+            </div>
+            <span style="font-size:11.5px;font-weight:500;color:#3d3a4f;text-align:right">68%</span>
+            <span style="color:#c9c9cf;font-size:12px;text-align:center">✕</span>
+          </div>
+
+          <div style="padding:11px 16px;border-bottom:1px solid #f0f0f2;display:grid;grid-template-columns:24px 1fr 74px 18px;align-items:center;gap:12px">
+            <div style="width:20px;height:16px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div>
+            <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+              <span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">QoE_Model_v7.xlsx</span>
+              <div style="height:4px;border-radius:2px;background:#e8e8ea;overflow:hidden"><div style="width:23%;height:100%;background:#3d3a4f;border-radius:2px"></div></div>
+              <span style="font-size:11px;color:#8e8e96">1.4 MB of 6.2 MB · 21s left</span>
+            </div>
+            <span style="font-size:11.5px;font-weight:500;color:#3d3a4f;text-align:right">23%</span>
+            <span style="color:#c9c9cf;font-size:12px;text-align:center">✕</span>
+          </div>
+
+          <div style="padding:11px 16px;border-bottom:1px solid #f0f0f2;display:grid;grid-template-columns:24px 1fr 74px 18px;align-items:center;gap:12px;background:#fdf3f1">
+            <div style="width:20px;height:16px;border:1px solid #f0d8d4;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6px/1 Helvetica,Arial,sans-serif;color:#c0392b">ZIP</div>
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+              <span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Legal_Exhibits_A-K.zip</span>
+              <span style="font-size:11px;color:#c0392b">Failed — file exceeds 5 GB limit</span>
+            </div>
+            <span style="font-size:11.5px;font-weight:500;color:#c0392b;text-align:right;text-decoration:underline">Retry</span>
+            <span style="color:#c0392b;font-size:12px;text-align:center">✕</span>
+          </div>
+
+          <div style="padding:11px 16px;display:grid;grid-template-columns:24px 1fr 74px 18px;align-items:center;gap:12px">
+            <div style="width:20px;height:16px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6px/1 Helvetica,Arial,sans-serif;color:#5c5c63">CSV</div>
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">AP_Aging_Jul26.csv</span><span style="font-size:11px;color:#8e8e96">Queued</span></div>
+            <span style="font-size:11.5px;color:#8e8e96;text-align:right">Waiting</span>
+            <span style="color:#c9c9cf;font-size:12px;text-align:center">✕</span>
+          </div>
+
+        </div>
+        <div style="padding:12px 16px;border-top:1px solid #e8e8ea;background:#fafafa;display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:12px;color:#8e8e96">Leaving the page cancels active uploads</span>
+          <span style="font-size:12.5px;font-weight:500;color:#3d3a4f">Retry all failed</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:56px 64px;display:flex;flex-direction:column;gap:28px;border-top:1px solid #e8e8ea">
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">04 — FILE PREVIEW</span>
+    <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em">In-app PDF viewer</h2>
+    <p style="margin:0;font-size:13px;color:#5c5c63;max-width:560px">Documents open in place rather than downloading — access stays logged and watermarks stay attached. Chrome is dark so the page is the brightest thing on screen; sharing is one click from here.</p>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">4.1 — PDF OPEN</span></sc-if>
+    <div style="width:1280px;height:800px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06);display:flex;flex-direction:column">
+      <div style="height:52px;flex:none;background:#26242e;display:flex;align-items:center;justify-content:space-between;padding:0 16px">
+        <div style="display:flex;align-items:center;gap:14px;min-width:0">
+          <span style="color:#b9b7c2;font-size:13px">←</span>
+          <div style="width:20px;height:16px;border:1px solid #514e5e;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6px/1 Helvetica,Arial,sans-serif;color:#e9a3a3;flex:none">PDF</div>
+          <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+            <span style="font-size:13px;font-weight:500;color:#fff;white-space:nowrap">QoE_Report_Draft_v3.pdf</span>
+            <span style="font-size:11px;color:#94919e">Project Meridian / 02 Financials · 11.6 MB</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;border:1px solid #454251;border-radius:6px;color:#d8d6de;font-size:12.5px">Page 4 / 38</div>
+          <div style="display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;border:1px solid #454251;border-radius:6px;color:#d8d6de;font-size:12.5px">100% <span style="color:#8b8896">▾</span></div>
+          <div style="height:30px;padding:0 12px;border:1px solid #454251;border-radius:6px;display:flex;align-items:center;font-size:12.5px;color:#d8d6de">Download</div>
+          <div style="height:30px;padding:0 14px;background:#fff;border-radius:6px;display:flex;align-items:center;font-size:12.5px;font-weight:500;color:#26242e">Share</div>
+          <span style="color:#8b8896;font-size:14px;padding-left:4px">⋯</span>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;min-height:0">
+        <div style="width:148px;flex:none;background:#1e1c25;border-right:1px solid #33303c;padding:16px 12px;display:flex;flex-direction:column;gap:10px;overflow:hidden">
+          <span style="font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#7c798a">PAGES</span>
+          <div style="width:100%;height:150px;background:#f4f4f5;border-radius:3px;opacity:.55"></div>
+          <div style="width:100%;height:150px;background:#f4f4f5;border-radius:3px;opacity:.55"></div>
+          <div style="width:100%;height:150px;background:#fff;border-radius:3px;outline:2px solid #fff;outline-offset:1px"></div>
+        </div>
+        <div style="flex:1;background:#33303c;display:flex;align-items:flex-start;justify-content:center;padding:28px;overflow:hidden">
+          <div style="width:600px;height:100%;background:#fff;border-radius:2px;box-shadow:0 8px 30px rgba(0,0,0,.35);padding:52px 56px;display:flex;flex-direction:column;gap:22px;position:relative">
+            <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-28deg);font:500 34px/1 Helvetica,Arial,sans-serif;letter-spacing:.14em;color:rgba(61,58,79,.07);white-space:nowrap">CONFIDENTIAL · A. RUIZ</span>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font:500 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">SECTION 3 — QUALITY OF EARNINGS</span>
+              <span style="font-size:22px;font-weight:500;letter-spacing:-.01em;line-height:1.25">Adjusted EBITDA reconciliation</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="height:8px;background:#f0f0f2;border-radius:2px"></div>
+              <div style="height:8px;background:#f0f0f2;border-radius:2px"></div>
+              <div style="height:8px;background:#f0f0f2;border-radius:2px;width:88%"></div>
+              <div style="height:8px;background:#f0f0f2;border-radius:2px;width:62%"></div>
+            </div>
+            <div style="border:1px solid #e8e8ea;border-radius:4px;overflow:hidden">
+              <div style="display:grid;grid-template-columns:1fr 90px 90px;height:30px;align-items:center;padding:0 12px;background:#fafafa;border-bottom:1px solid #e8e8ea;font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96"><span>ADJUSTMENT</span><span style="text-align:right">FY24</span><span style="text-align:right">FY25</span></div>
+              <div style="display:grid;grid-template-columns:1fr 90px 90px;height:30px;align-items:center;padding:0 12px;border-bottom:1px solid #f0f0f2;font-size:11.5px"><span>Reported EBITDA</span><span style="text-align:right;color:#5c5c63">18,402</span><span style="text-align:right;color:#5c5c63">21,884</span></div>
+              <div style="display:grid;grid-template-columns:1fr 90px 90px;height:30px;align-items:center;padding:0 12px;border-bottom:1px solid #f0f0f2;font-size:11.5px"><span>Non-recurring legal</span><span style="text-align:right;color:#5c5c63">1,140</span><span style="text-align:right;color:#5c5c63">318</span></div>
+              <div style="display:grid;grid-template-columns:1fr 90px 90px;height:30px;align-items:center;padding:0 12px;border-bottom:1px solid #f0f0f2;font-size:11.5px"><span>Founder compensation</span><span style="text-align:right;color:#5c5c63">742</span><span style="text-align:right;color:#5c5c63">742</span></div>
+              <div style="display:grid;grid-template-columns:1fr 90px 90px;height:30px;align-items:center;padding:0 12px;font-size:11.5px;font-weight:500;background:#fafafa"><span>Adjusted EBITDA</span><span style="text-align:right">20,284</span><span style="text-align:right">22,944</span></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="height:8px;background:#f0f0f2;border-radius:2px"></div>
+              <div style="height:8px;background:#f0f0f2;border-radius:2px;width:74%"></div>
+            </div>
+          </div>
+        </div>
+        <div style="width:264px;flex:none;background:#fff;border-left:1px solid #e8e8ea;padding:20px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">DETAILS</span>
+            <div style="display:flex;flex-direction:column;gap:9px;font-size:12.5px">
+              <div style="display:flex;justify-content:space-between"><span style="color:#8e8e96">Uploaded by</span><span>J. Tran</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#8e8e96">Uploaded</span><span>13 Aug 2026</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#8e8e96">Version</span><span>3 of 3</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#8e8e96">Watermark</span><span style="color:#2f6b4f;font-weight:500">On</span></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:1px solid #e8e8ea">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">ACCESS · 4</span>
+              <span style="font-size:12px;font-weight:500;color:#3d3a4f">Manage</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;font-size:12.5px">
+              <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:50%;background:#e6e4ea;display:flex;align-items:center;justify-content:center;font:500 9.5px/1 Helvetica,Arial,sans-serif;color:#5c5c63">JT</div><div style="display:flex;flex-direction:column"><span>J. Tran</span><span style="font-size:11px;color:#8e8e96">Editor</span></div></div>
+              <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:50%;background:#e0e2e6;display:flex;align-items:center;justify-content:center;font:500 9.5px/1 Helvetica,Arial,sans-serif;color:#5c5c63">MO</div><div style="display:flex;flex-direction:column"><span>M. Oyelaran</span><span style="font-size:11px;color:#8e8e96">Viewer</span></div></div>
+              <div style="display:flex;align-items:center;gap:9px"><div style="width:24px;height:24px;border-radius:50%;background:#f4f4f5;border:1px dashed #d4d4d8;display:flex;align-items:center;justify-content:center;font:500 9.5px/1 Helvetica,Arial,sans-serif;color:#8e8e96">?</div><div style="display:flex;flex-direction:column"><span style="color:#8a5a12">1 pending invite</span><span style="font-size:11px;color:#8e8e96">Sent 2 days ago</span></div></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding-top:18px;border-top:1px solid #e8e8ea">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">RECENT ACTIVITY</span>
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:#5c5c63;line-height:1.45">
+              <span>M. Oyelaran viewed pages 1–12 · 1h ago</span>
+              <span>J. Tran replaced v2 → v3 · 13 Aug</span>
+              <span>Link sharing enabled · 13 Aug</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section style="padding:56px 64px;display:flex;flex-direction:column;gap:28px;border-top:1px solid #e8e8ea">
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">05 — SHARE</span>
+    <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em">Share dialog</h2>
+    <p style="margin:0;font-size:13px;color:#5c5c63;max-width:560px">Two tabs, one dialog. Public links are the riskier path, so that tab states the exposure in plain language and defaults to off. Named access is the recommended path and is where revocation lives.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">5.1 — PUBLIC LINK TAB</span></sc-if>
+      <div style="width:760px;height:600px;background:#e9e9ec;border:1px solid #e2e2e5;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:32px">
+        <div style="width:520px;background:#fff;border-radius:12px;box-shadow:0 16px 44px rgba(24,24,27,.18);overflow:hidden">
+          <div style="padding:20px 24px 0;display:flex;flex-direction:column;gap:4px">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between">
+              <span style="font-size:15.5px;font-weight:500;letter-spacing:-.005em">Share “QoE_Report_Draft_v3.pdf”</span>
+              <span style="color:#a8a8b0;font-size:13px">✕</span>
+            </div>
+            <span style="font-size:12.5px;color:#8e8e96">Project Meridian / 02 Financials</span>
+          </div>
+          <div style="padding:18px 24px 0;display:flex;gap:4px;border-bottom:1px solid #e8e8ea">
+            <div style="padding:8px 12px;font-size:13px;font-weight:500;color:#18181b;border-bottom:2px solid #3d3a4f;margin-bottom:-1px">Public link</div>
+            <div style="padding:8px 12px;font-size:13px;color:#8e8e96">People</div>
+          </div>
+          <div style="padding:20px 24px 24px;display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font-size:13.5px;font-weight:500">Anyone with the link can view</span>
+                <span style="font-size:12.5px;color:#5c5c63;line-height:1.45">No sign-in required. Views are logged by IP, not by person.</span>
+              </div>
+              <div style="width:38px;height:22px;border-radius:11px;background:#3d3a4f;flex:none;padding:2px;display:flex;justify-content:flex-end"><div style="width:18px;height:18px;border-radius:50%;background:#fff"></div></div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <div style="flex:1;height:36px;border:1px solid #e2e2e5;border-radius:8px;background:#fafafa;display:flex;align-items:center;padding:0 12px;font-size:12.5px;color:#5c5c63;overflow:hidden;white-space:nowrap">strongroom.io/s/9fK2-mQ7xLp4</div>
+              <div style="height:36px;padding:0 16px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Copy link</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:16px;border-top:1px solid #e8e8ea">
+              <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">LINK SETTINGS</span>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Require email to view</span><div style="width:38px;height:22px;border-radius:11px;background:#e2e2e5;padding:2px;display:flex"><div style="width:18px;height:18px;border-radius:50%;background:#fff"></div></div></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Allow download</span><div style="width:38px;height:22px;border-radius:11px;background:#e2e2e5;padding:2px;display:flex"><div style="width:18px;height:18px;border-radius:50%;background:#fff"></div></div></div>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:13px">Expires</span>
+                <div style="height:30px;padding:0 10px;border:1px solid #e2e2e5;border-radius:6px;display:flex;align-items:center;gap:8px;font-size:12.5px">30 Sep 2026 <span style="color:#8e8e96">▾</span></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:8px;background:#fdf6e8;border:1px solid #f3e4c4">
+              <div style="width:14px;height:14px;flex:none;background:#8a5a12;transform:rotate(45deg);border-radius:2px"></div>
+              <span style="font-size:12.5px;color:#7a5010;line-height:1.45">This document is watermarked. Public link views are watermarked “SHARED LINK” instead of a viewer name.</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px">
+              <span style="font-size:12.5px;font-weight:500;color:#c0392b">Disable link</span>
+              <div style="display:flex;gap:8px">
+                <div style="height:34px;padding:0 14px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500">Cancel</div>
+                <div style="height:34px;padding:0 16px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Done</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">5.2 — PEOPLE TAB · ACCEPTED + PENDING</span></sc-if>
+      <div style="width:760px;height:600px;background:#e9e9ec;border:1px solid #e2e2e5;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:32px">
+        <div style="width:520px;background:#fff;border-radius:12px;box-shadow:0 16px 44px rgba(24,24,27,.18);overflow:hidden">
+          <div style="padding:20px 24px 0;display:flex;flex-direction:column;gap:4px">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between">
+              <span style="font-size:15.5px;font-weight:500;letter-spacing:-.005em">Share “QoE_Report_Draft_v3.pdf”</span>
+              <span style="color:#a8a8b0;font-size:13px">✕</span>
+            </div>
+            <span style="font-size:12.5px;color:#8e8e96">Project Meridian / 02 Financials</span>
+          </div>
+          <div style="padding:18px 24px 0;display:flex;gap:4px;border-bottom:1px solid #e8e8ea">
+            <div style="padding:8px 12px;font-size:13px;color:#8e8e96">Public link</div>
+            <div style="padding:8px 12px;font-size:13px;font-weight:500;color:#18181b;border-bottom:2px solid #3d3a4f;margin-bottom:-1px">People</div>
+          </div>
+          <div style="padding:20px 24px 24px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;gap:8px">
+              <div style="flex:1;height:36px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:12.5px;color:#a8a8b0">Add people by email</div>
+              <div style="height:36px;padding:0 10px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500">Viewer <span style="color:#8e8e96">▾</span></div>
+              <div style="height:36px;padding:0 14px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Invite</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:30px;height:30px;border-radius:50%;background:#e6e4ea;display:flex;align-items:center;justify-content:center;font:500 11px/1 Helvetica,Arial,sans-serif;color:#5c5c63">AR</div>
+                  <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:500">Anna Ruiz <span style="color:#8e8e96;font-weight:400">(you)</span></span><span style="font-size:11.5px;color:#8e8e96">anna@harlanco.com</span></div>
+                </div>
+                <span style="font-size:12.5px;color:#8e8e96">Owner</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid #f0f0f2">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:30px;height:30px;border-radius:50%;background:#e0e2e6;display:flex;align-items:center;justify-content:center;font:500 11px/1 Helvetica,Arial,sans-serif;color:#5c5c63">JT</div>
+                  <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:500">Jonah Tran</span><span style="font-size:11.5px;color:#8e8e96">j.tran@meridianadv.com</span></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="height:28px;padding:0 8px;border:1px solid #e2e2e5;border-radius:6px;display:flex;align-items:center;gap:6px;font-size:12px">Editor <span style="color:#8e8e96">▾</span></div>
+                  <span style="font-size:12.5px;color:#c0392b">Revoke</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid #f0f0f2">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:30px;height:30px;border-radius:50%;background:#f4f4f5;display:flex;align-items:center;justify-content:center;font:500 11px/1 Helvetica,Arial,sans-serif;color:#5c5c63">MO</div>
+                  <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:500">Marcus Oyelaran</span><span style="font-size:11.5px;color:#8e8e96">marcus@oyelaran.co</span></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="height:28px;padding:0 8px;border:1px solid #e2e2e5;border-radius:6px;display:flex;align-items:center;gap:6px;font-size:12px">Viewer <span style="color:#8e8e96">▾</span></div>
+                  <span style="font-size:12.5px;color:#c0392b">Revoke</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid #f0f0f2;background:#fdfbf6;margin:0 -12px;padding-left:12px;padding-right:12px;border-radius:0 0 6px 6px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:30px;height:30px;border-radius:50%;background:#fff;border:1px dashed #d9c9a3;display:flex;align-items:center;justify-content:center;font:500 11px/1 Helvetica,Arial,sans-serif;color:#8a5a12">SK</div>
+                  <div style="display:flex;flex-direction:column;gap:3px">
+                    <div style="display:flex;align-items:center;gap:7px"><span style="font-size:13px;font-weight:500">s.kaur@brightpath.vc</span><span style="font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.07em;padding:3px 5px;border-radius:3px;background:#fdf6e8;color:#8a5a12;border:1px solid #f3e4c4">PENDING</span></div>
+                    <span style="font-size:11.5px;color:#8e8e96">Invited 2 days ago · not yet accepted</span>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px">
+                  <span style="font-size:12.5px;font-weight:500;color:#3d3a4f">Resend</span>
+                  <span style="font-size:12.5px;color:#c0392b">Cancel</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #e8e8ea">
+              <span style="font-size:12px;color:#8e8e96">Access inherits from “02 Financials”</span>
+              <div style="height:34px;padding:0 16px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Done</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ annotations }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;max-width:760px;font-size:12.5px;line-height:1.55;color:#5c5c63"><span style="font:500 11px Helvetica,Arial,sans-serif;letter-spacing:.06em;color:#c0392b">NOTE</span>&nbsp;&nbsp;Pending invites read as a raw email with a warm tinted row — they are a claim on access, not a person with access. Accepted rows show a name; pending rows never do.</p>
+      </sc-if>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:56px 64px;display:flex;flex-direction:column;gap:28px;border-top:1px solid #e8e8ea">
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">06 — DESTRUCTIVE ACTIONS</span>
+    <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em">Delete confirmation</h2>
+    <p style="margin:0;font-size:13px;color:#5c5c63;max-width:560px">Both variants name exactly what disappears. Red is used once per dialog, on the confirming button. The shared variant adds a consequence block — deletion is also a revocation, and counterparties will notice.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">6.1 — UNSHARED FOLDER</span></sc-if>
+      <div style="width:620px;height:420px;background:#e9e9ec;border:1px solid #e2e2e5;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:32px">
+        <div style="width:452px;background:#fff;border-radius:12px;box-shadow:0 16px 44px rgba(24,24,27,.18);padding:24px">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <span style="font-size:15.5px;font-weight:500;letter-spacing:-.005em">Delete “FY2023”?</span>
+            <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5c5c63">This folder and everything inside it moves to Trash and is permanently removed after 30 days.</p>
+            <div style="border:1px solid #e8e8ea;border-radius:8px;background:#fafafa;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+              <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">CONTENTS</span>
+              <div style="display:flex;gap:22px;font-size:13px">
+                <span><strong style="font-weight:500">12</strong> files</span>
+                <span><strong style="font-weight:500">3</strong> folders</span>
+                <span style="color:#8e8e96">8.4 MB</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;padding-top:4px">
+              <div style="height:34px;padding:0 14px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500">Cancel</div>
+              <div style="height:34px;padding:0 16px;background:#c0392b;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Delete folder</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">6.2 — SHARED FOLDER · ACCESS WILL BE REVOKED</span></sc-if>
+      <div style="width:620px;height:500px;background:#e9e9ec;border:1px solid #e2e2e5;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:32px">
+        <div style="width:452px;background:#fff;border-radius:12px;box-shadow:0 16px 44px rgba(24,24,27,.18);padding:24px">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <span style="font-size:15.5px;font-weight:500;letter-spacing:-.005em">Delete “02 Financials”?</span>
+            <p style="margin:0;font-size:13.5px;line-height:1.55;color:#5c5c63">This folder and everything inside it moves to Trash and is permanently removed after 30 days.</p>
+            <div style="border:1px solid #e8e8ea;border-radius:8px;background:#fafafa;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+              <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">CONTENTS</span>
+              <div style="display:flex;gap:22px;font-size:13px">
+                <span><strong style="font-weight:500">86</strong> files</span>
+                <span><strong style="font-weight:500">9</strong> folders</span>
+                <span style="color:#8e8e96">241 MB</span>
+              </div>
+            </div>
+            <div style="border:1px solid #f0d8d4;border-radius:8px;background:#fdf3f1;padding:12px 14px;display:flex;gap:11px">
+              <div style="width:15px;height:15px;flex:none;margin-top:1px;background:#c0392b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600">!</div>
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <span style="font-size:13px;font-weight:500;color:#9c2d21">Shared access will be revoked</span>
+                <span style="font-size:12.5px;line-height:1.5;color:#8a3226">4 people and 1 active public link lose access immediately. Anyone opening the link will see “no longer available”.</span>
+                <div style="display:flex;align-items:center;gap:6px;padding-top:2px">
+                  <div style="width:22px;height:22px;border-radius:50%;background:#f6e0dc;border:1.5px solid #fdf3f1;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#8a3226">JT</div>
+                  <div style="width:22px;height:22px;border-radius:50%;background:#f6e0dc;border:1.5px solid #fdf3f1;margin-left:-8px;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#8a3226">MO</div>
+                  <div style="width:22px;height:22px;border-radius:50%;background:#f6e0dc;border:1.5px solid #fdf3f1;margin-left:-8px;display:flex;align-items:center;justify-content:center;font:500 9px/1 Helvetica,Arial,sans-serif;color:#8a3226">SK</div>
+                  <span style="font-size:12px;color:#8a3226;margin-left:6px">+1 other</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:9px;padding-top:2px">
+              <div style="width:15px;height:15px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+              <span style="font-size:12.5px;color:#5c5c63">Notify people with access by email</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;padding-top:4px">
+              <div style="height:34px;padding:0 14px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500">Cancel</div>
+              <div style="height:34px;padding:0 16px;background:#c0392b;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Delete and revoke access</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:56px 64px;display:flex;flex-direction:column;gap:28px;border-top:1px solid #e8e8ea">
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">07 — RENAME &amp; MOVE</span>
+    <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em">Renaming in place, moving in a picker</h2>
+    <p style="margin:0;font-size:13px;color:#5c5c63;max-width:560px">Rename happens in the row so the user keeps their place in a long list. Move needs a tree, so it earns a dialog. Both validate against the destination before the action is allowed.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">7.1 — INLINE RENAME · CONFLICT</span></sc-if>
+      <div style="width:760px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06)">
+        <div style="display:grid;grid-template-columns:30px 1fr 96px 128px;align-items:center;gap:14px;height:34px;padding:0 20px;border-bottom:1px solid #e8e8ea;font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.09em;color:#8e8e96"><span></span><span>NAME</span><span>SIZE</span><span>MODIFIED</span></div>
+        <div style="display:grid;grid-template-columns:30px 1fr 96px 128px;align-items:center;gap:14px;height:44px;padding:0 20px;border-bottom:1px solid #f0f0f2">
+          <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#c0392b">PDF</div>
+          <span style="font-size:13.5px;font-weight:500">FY25_Audited_Financials.pdf</span>
+          <span style="font-size:12.5px;color:#5c5c63">4.2 MB</span>
+          <span style="font-size:12.5px;color:#5c5c63">Today, 09:12</span>
+        </div>
+        <div style="padding:8px 20px 14px;border-bottom:1px solid #f0f0f2;background:#fafafa">
+          <div style="display:grid;grid-template-columns:30px 1fr 96px 128px;align-items:start;gap:14px">
+            <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#c0392b;margin-top:9px">PDF</div>
+            <div style="display:flex;flex-direction:column;gap:7px;padding-top:4px">
+              <div style="display:flex;gap:8px;align-items:center">
+                <div style="flex:1;height:32px;border:1.5px solid #c0392b;border-radius:7px;background:#fff;display:flex;align-items:center;padding:0 10px;font-size:13px;box-shadow:0 0 0 3px rgba(192,57,43,.10)"><span>QoE_Report_Draft_v3</span><span style="width:1px;height:16px;background:#18181b;margin-left:1px"></span><span style="color:#8e8e96">.pdf</span></div>
+                <div style="height:32px;padding:0 12px;background:#e6e4ea;border-radius:7px;display:flex;align-items:center;font-size:12.5px;font-weight:500;color:#8e8e96">Save</div>
+                <div style="height:32px;padding:0 12px;border:1px solid #e2e2e5;border-radius:7px;background:#fff;display:flex;align-items:center;font-size:12.5px;font-weight:500">Cancel</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px">
+                <div style="width:13px;height:13px;flex:none;background:#c0392b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:600">!</div>
+                <span style="font-size:12px;color:#c0392b">A file named “QoE_Report_Draft_v3.pdf” already exists in this folder.</span>
+                <span style="font-size:12px;font-weight:500;color:#3d3a4f;text-decoration:underline">Keep both</span>
+              </div>
+            </div>
+            <span style="font-size:12.5px;color:#8e8e96;padding-top:9px">11.6 MB</span>
+            <span style="font-size:12.5px;color:#8e8e96;padding-top:9px">Yesterday</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:30px 1fr 96px 128px;align-items:center;gap:14px;height:44px;padding:0 20px">
+          <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div>
+          <span style="font-size:13.5px;font-weight:500">Revenue_by_Cohort.xlsx</span>
+          <span style="font-size:12.5px;color:#5c5c63">880 KB</span>
+          <span style="font-size:12.5px;color:#5c5c63">12 Aug 2026</span>
+        </div>
+      </div>
+      <sc-if value="{{ annotations }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;max-width:760px;font-size:12.5px;line-height:1.55;color:#5c5c63"><span style="font:500 11px Helvetica,Arial,sans-serif;letter-spacing:.06em;color:#c0392b">NOTE</span>&nbsp;&nbsp;Extension is shown but not selected on entry, and Save disables while the name conflicts — with “Keep both” offered inline as the one-click way out.</p>
+      </sc-if>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">7.2 — MOVE DIALOG</span></sc-if>
+      <div style="width:620px;height:560px;background:#e9e9ec;border:1px solid #e2e2e5;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:32px">
+        <div style="width:456px;background:#fff;border-radius:12px;box-shadow:0 16px 44px rgba(24,24,27,.18);overflow:hidden">
+          <div style="padding:20px 24px 16px;display:flex;flex-direction:column;gap:4px">
+            <span style="font-size:15.5px;font-weight:500;letter-spacing:-.005em">Move 2 items</span>
+            <span style="font-size:12.5px;color:#8e8e96">FY25_Audited_Financials.pdf, Debt_Schedule.xlsx</span>
+          </div>
+          <div style="padding:0 24px 16px">
+            <div style="height:34px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;gap:8px;padding:0 10px"><div style="width:11px;height:11px;border:1.5px solid #8e8e96;border-radius:50%"></div><span style="font-size:12.5px;color:#a8a8b0">Search folders</span></div>
+          </div>
+          <div style="border-top:1px solid #e8e8ea;border-bottom:1px solid #e8e8ea;max-height:280px;overflow:hidden">
+            <div style="display:flex;align-items:center;gap:9px;height:38px;padding:0 24px;font-size:13px"><span style="color:#8e8e96;font-size:9px;width:10px">▾</span><div style="width:20px;height:16px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px"></div><span style="font-weight:500">Project Meridian</span></div>
+            <div style="display:flex;align-items:center;gap:9px;height:38px;padding:0 24px 0 46px;font-size:13px;border-top:1px solid #f6f6f7"><span style="color:#c9c9cf;font-size:9px;width:10px">▸</span><div style="width:20px;height:16px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px"></div><span>01 Corporate</span><span style="margin-left:auto;font-size:11.5px;color:#a8a8b0">24 items</span></div>
+            <div style="display:flex;align-items:center;gap:9px;height:38px;padding:0 24px 0 46px;font-size:13px;border-top:1px solid #f6f6f7;background:#fafafa"><span style="color:#8e8e96;font-size:9px;width:10px">▾</span><div style="width:20px;height:16px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px"></div><span>02 Financials</span><span style="margin-left:auto;font-size:11.5px;color:#a8a8b0">current</span></div>
+            <div style="display:flex;align-items:center;gap:9px;height:38px;padding:0 24px 0 68px;font-size:13px;border-top:1px solid #f6f6f7"><span style="width:10px"></span><div style="width:20px;height:16px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px"></div><span style="color:#a8a8b0">Audited Statements</span><span style="margin-left:auto;font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.07em;color:#a8a8b0">SOURCE</span></div>
+            <div style="display:flex;align-items:center;gap:9px;height:38px;padding:0 24px 0 68px;font-size:13px;border-top:1px solid #f6f6f7;background:#f0eff4;box-shadow:inset 2px 0 0 #3d3a4f"><span style="width:10px"></span><div style="width:20px;height:16px;background:#e2dfe9;border:1px solid #c8c3d4;border-radius:3px"></div><span style="font-weight:500;color:#3d3a4f">Monthly Reporting</span><span style="margin-left:auto;color:#3d3a4f;font-size:11px">✓</span></div>
+            <div style="display:flex;align-items:center;gap:9px;height:38px;padding:0 24px 0 68px;font-size:13px;border-top:1px solid #f6f6f7"><span style="width:10px"></span><div style="width:20px;height:16px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px"></div><span>Tax</span></div>
+            <div style="display:flex;align-items:center;gap:9px;height:38px;padding:0 24px 0 46px;font-size:13px;border-top:1px solid #f6f6f7"><span style="color:#c9c9cf;font-size:9px;width:10px">▸</span><div style="width:20px;height:16px;background:#f0eff4;border:1px solid #d8d5e1;border-radius:3px"></div><span>03 Legal</span><span style="margin-left:auto;font-size:11.5px;color:#a8a8b0">61 items</span></div>
+            <div style="display:flex;align-items:center;gap:9px;height:38px;padding:0 24px 0 46px;font-size:13px;border-top:1px solid #f6f6f7;opacity:.5"><span style="width:10px"></span><div style="width:20px;height:16px;background:#f4f4f5;border:1px solid #e2e2e5;border-radius:3px"></div><span>04 Commercial</span><span style="margin-left:auto;font-size:11.5px;color:#a8a8b0">read-only</span></div>
+          </div>
+          <div style="padding:14px 24px 20px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;gap:7px;font-size:12.5px;color:#5c5c63"><span style="color:#8e8e96">Destination:</span><span style="font-weight:500;color:#18181b">02 Financials / Monthly Reporting</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:12.5px;font-weight:500;color:#3d3a4f">New folder here</span>
+              <div style="display:flex;gap:8px">
+                <div style="height:34px;padding:0 14px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500">Cancel</div>
+                <div style="height:34px;padding:0 16px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Move here</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section style="padding:56px 64px;display:flex;flex-direction:column;gap:28px;border-top:1px solid #e8e8ea">
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">08 — SEARCH &amp; FILTER</span>
+    <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em">Collapsed and expanded</h2>
+    <p style="margin:0;font-size:13px;color:#5c5c63;max-width:560px">Collapsed by default: name search plus three dropdowns. Expanding reveals ranges rather than more dropdowns — a reviewer looking for “anything legal added since the last board meeting” needs two axes at once.</p>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:36px">
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">8.1 — COLLAPSED</span></sc-if>
+      <div style="width:1100px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06)">
+        <div style="padding:14px 20px;display:flex;align-items:center;gap:10px">
+          <div style="flex:1;height:36px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;gap:9px;padding:0 12px">
+            <div style="width:12px;height:12px;border:1.5px solid #8e8e96;border-radius:50%"></div>
+            <span style="font-size:13px;color:#a8a8b0">Search 348 items in Project Meridian</span>
+          </div>
+          <div style="height:36px;padding:0 12px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:13px;color:#5c5c63">Type <span style="color:#8e8e96">▾</span></div>
+          <div style="height:36px;padding:0 12px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:13px;color:#5c5c63">Size <span style="color:#8e8e96">▾</span></div>
+          <div style="height:36px;padding:0 12px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:13px;color:#5c5c63">Date <span style="color:#8e8e96">▾</span></div>
+          <div style="height:36px;padding:0 12px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500">More filters <span style="color:#8e8e96;font-size:9px">▾</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">8.2 — EXPANDED, WITH ACTIVE FILTERS</span></sc-if>
+      <div style="width:1100px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06)">
+        <div style="padding:14px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0f0f2">
+          <div style="flex:1;height:36px;border:1.5px solid #3d3a4f;border-radius:8px;display:flex;align-items:center;gap:9px;padding:0 12px;box-shadow:0 0 0 3px rgba(61,58,79,.10)">
+            <div style="width:12px;height:12px;border:1.5px solid #5c5c63;border-radius:50%"></div>
+            <span style="font-size:13px">schedule</span>
+            <span style="width:1px;height:16px;background:#18181b"></span>
+            <span style="margin-left:auto;color:#a8a8b0;font-size:12px">✕</span>
+          </div>
+          <div style="height:36px;padding:0 12px;border:1px solid #3d3a4f;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;background:#f0eff4;color:#3d3a4f">Type · 2 <span>▾</span></div>
+          <div style="height:36px;padding:0 12px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:13px;color:#5c5c63">Size <span style="color:#8e8e96">▾</span></div>
+          <div style="height:36px;padding:0 12px;border:1px solid #3d3a4f;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;background:#f0eff4;color:#3d3a4f">Date · custom <span>▾</span></div>
+          <div style="height:36px;padding:0 12px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;background:#fafafa">Fewer filters <span style="color:#8e8e96;font-size:9px">▴</span></div>
+        </div>
+        <div style="padding:20px;display:grid;grid-template-columns:1.15fr 1fr 1.25fr;gap:28px;background:#fafafa;border-bottom:1px solid #e8e8ea">
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">FILE TYPE</span>
+            <div style="display:flex;flex-wrap:wrap;gap:7px">
+              <div style="height:28px;padding:0 10px;border:1px solid #3d3a4f;background:#3d3a4f;color:#fff;border-radius:14px;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500">PDF <span style="opacity:.7">✕</span></div>
+              <div style="height:28px;padding:0 10px;border:1px solid #3d3a4f;background:#3d3a4f;color:#fff;border-radius:14px;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500">Spreadsheet <span style="opacity:.7">✕</span></div>
+              <div style="height:28px;padding:0 10px;border:1px solid #e2e2e5;background:#fff;border-radius:14px;display:flex;align-items:center;font-size:12px;color:#5c5c63">Document</div>
+              <div style="height:28px;padding:0 10px;border:1px solid #e2e2e5;background:#fff;border-radius:14px;display:flex;align-items:center;font-size:12px;color:#5c5c63">Presentation</div>
+              <div style="height:28px;padding:0 10px;border:1px solid #e2e2e5;background:#fff;border-radius:14px;display:flex;align-items:center;font-size:12px;color:#5c5c63">Image</div>
+              <div style="height:28px;padding:0 10px;border:1px solid #e2e2e5;background:#fff;border-radius:14px;display:flex;align-items:center;font-size:12px;color:#5c5c63">Folder</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">SIZE</span>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div style="flex:1;height:32px;border:1px solid #e2e2e5;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:12.5px"><span style="color:#a8a8b0">Min</span><span style="color:#8e8e96;font-size:11.5px">MB</span></div>
+                <span style="color:#a8a8b0;font-size:12px">to</span>
+                <div style="flex:1;height:32px;border:1px solid #e2e2e5;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:12.5px"><span style="color:#a8a8b0">Max</span><span style="color:#8e8e96;font-size:11.5px">MB</span></div>
+              </div>
+              <div style="display:flex;gap:7px">
+                <div style="height:26px;padding:0 9px;border:1px solid #e2e2e5;background:#fff;border-radius:13px;display:flex;align-items:center;font-size:11.5px;color:#5c5c63">&lt; 1 MB</div>
+                <div style="height:26px;padding:0 9px;border:1px solid #e2e2e5;background:#fff;border-radius:13px;display:flex;align-items:center;font-size:11.5px;color:#5c5c63">1–10 MB</div>
+                <div style="height:26px;padding:0 9px;border:1px solid #e2e2e5;background:#fff;border-radius:13px;display:flex;align-items:center;font-size:11.5px;color:#5c5c63">&gt; 10 MB</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">MODIFIED</span>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div style="flex:1;height:32px;border:1px solid #e2e2e5;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:12.5px"><span>1 Jul 2026</span><span style="color:#8e8e96;font-size:11px">▾</span></div>
+                <span style="color:#a8a8b0;font-size:12px">to</span>
+                <div style="flex:1;height:32px;border:1px solid #e2e2e5;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:12.5px"><span>14 Aug 2026</span><span style="color:#8e8e96;font-size:11px">▾</span></div>
+              </div>
+              <div style="display:flex;gap:7px">
+                <div style="height:26px;padding:0 9px;border:1px solid #e2e2e5;background:#fff;border-radius:13px;display:flex;align-items:center;font-size:11.5px;color:#5c5c63">Today</div>
+                <div style="height:26px;padding:0 9px;border:1px solid #e2e2e5;background:#fff;border-radius:13px;display:flex;align-items:center;font-size:11.5px;color:#5c5c63">7 days</div>
+                <div style="height:26px;padding:0 9px;border:1px solid #e2e2e5;background:#fff;border-radius:13px;display:flex;align-items:center;font-size:11.5px;color:#5c5c63">30 days</div>
+                <div style="height:26px;padding:0 9px;border:1px solid #3d3a4f;background:#f0eff4;color:#3d3a4f;border-radius:13px;display:flex;align-items:center;font-size:11.5px;font-weight:500">Custom</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:12px 20px;display:flex;align-items:center;justify-content:space-between;background:#fff">
+          <div style="display:flex;align-items:center;gap:14px">
+            <span style="font-size:12.5px;color:#5c5c63"><strong style="font-weight:500;color:#18181b">6 results</strong> in 3 folders</span>
+            <span style="font-size:12.5px;color:#3d3a4f;font-weight:500">Clear all filters</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="height:30px;padding:0 12px;border:1px solid #e2e2e5;border-radius:7px;display:flex;align-items:center;font-size:12.5px;font-weight:500">Save this search</div>
+            <div style="height:30px;padding:0 14px;background:#3d3a4f;border-radius:7px;display:flex;align-items:center;font-size:12.5px;font-weight:500;color:#fff">Apply</div>
+          </div>
+        </div>
+        <div style="border-top:1px solid #e8e8ea">
+          <div style="display:grid;grid-template-columns:30px 1fr 260px 96px 128px;align-items:center;gap:14px;height:44px;padding:0 20px;border-bottom:1px solid #f0f0f2">
+            <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div>
+            <span style="font-size:13.5px"><span style="background:#f6f0c8">Schedule</span>_of_Indebtedness.xlsx</span>
+            <span style="font-size:12px;color:#8e8e96">02 Financials / Audited Statements</span>
+            <span style="font-size:12.5px;color:#5c5c63">1.1 MB</span>
+            <span style="font-size:12.5px;color:#5c5c63">12 Aug 2026</span>
+          </div>
+          <div style="display:grid;grid-template-columns:30px 1fr 260px 96px 128px;align-items:center;gap:14px;height:44px;padding:0 20px;border-bottom:1px solid #f0f0f2">
+            <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#c0392b">PDF</div>
+            <span style="font-size:13.5px">Lease_<span style="background:#f6f0c8">Schedule</span>_Annex_B.pdf</span>
+            <span style="font-size:12px;color:#8e8e96">03 Legal / Real Property</span>
+            <span style="font-size:12.5px;color:#5c5c63">3.8 MB</span>
+            <span style="font-size:12.5px;color:#5c5c63">6 Aug 2026</span>
+          </div>
+          <div style="display:grid;grid-template-columns:30px 1fr 260px 96px 128px;align-items:center;gap:14px;height:44px;padding:0 20px">
+            <div style="width:22px;height:18px;border:1px solid #e2e2e5;border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 6.5px/1 Helvetica,Arial,sans-serif;color:#2f6b4f">XLS</div>
+            <span style="font-size:13.5px">Capex_<span style="background:#f6f0c8">Schedule</span>_FY25.xlsx</span>
+            <span style="font-size:12px;color:#8e8e96">02 Financials / FY2025 — Draft</span>
+            <span style="font-size:12.5px;color:#5c5c63">742 KB</span>
+            <span style="font-size:12.5px;color:#5c5c63">2 Aug 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:56px 64px 96px;display:flex;flex-direction:column;gap:28px;border-top:1px solid #e8e8ea">
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.12em;color:#8e8e96">09 — ACCOUNT SETTINGS</span>
+    <h2 style="margin:0;font-size:20px;font-weight:500;letter-spacing:-.01em">Password and danger zone</h2>
+    <p style="margin:0;font-size:13px;color:#5c5c63;max-width:560px">Settings is the one place the layout goes wide-margin and low-density. The danger zone is visually quarantined — bordered, last, and gated behind typing the account email.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">9.1 — CHANGE PASSWORD (EXISTING PASSWORD)</span></sc-if>
+      <div style="width:820px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06)">
+        <div style="height:56px;border-bottom:1px solid #e8e8ea;display:flex;align-items:center;gap:24px;padding:0 28px">
+          <span style="font-size:15px;font-weight:500">Account</span>
+          <div style="display:flex;gap:2px;margin-left:12px">
+            <div style="padding:8px 12px;font-size:13px;color:#8e8e96">Profile</div>
+            <div style="padding:8px 12px;font-size:13px;font-weight:500;border-bottom:2px solid #3d3a4f;margin-bottom:-18px">Security</div>
+            <div style="padding:8px 12px;font-size:13px;color:#8e8e96">Notifications</div>
+            <div style="padding:8px 12px;font-size:13px;color:#8e8e96">Billing</div>
+          </div>
+        </div>
+        <div style="padding:32px;display:flex;flex-direction:column;gap:32px">
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:40px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:14px;font-weight:500">Password</span>
+              <span style="font-size:12.5px;line-height:1.5;color:#8e8e96">Last changed 4 Feb 2026</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;max-width:380px">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:12.5px;font-weight:500">Current password</span>
+                <div style="height:36px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:13px;letter-spacing:.16em;color:#5c5c63">••••••••••</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:12.5px;font-weight:500">New password</span>
+                <div style="height:36px;border:1.5px solid #3d3a4f;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:13px;letter-spacing:.16em;box-shadow:0 0 0 3px rgba(61,58,79,.10)">••••••••••••</div>
+                <div style="display:flex;align-items:center;gap:8px;padding-top:2px">
+                  <div style="flex:1;height:3px;border-radius:2px;background:#e8e8ea;overflow:hidden"><div style="width:78%;height:100%;background:#2f6b4f"></div></div>
+                  <span style="font-size:11.5px;font-weight:500;color:#2f6b4f">Strong</span>
+                </div>
+                <span style="font-size:11.5px;color:#8e8e96">12+ characters. Not reused from your last 5 passwords.</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:12.5px;font-weight:500">Confirm new password</span>
+                <div style="height:36px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:13px;letter-spacing:.16em;color:#5c5c63">••••••••••••</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding-top:4px">
+                <div style="height:34px;padding:0 16px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Update password</div>
+                <span style="font-size:12.5px;color:#5c5c63">Signs out other sessions</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:40px;padding-top:28px;border-top:1px solid #e8e8ea">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:14px;font-weight:500">Two-factor</span>
+              <span style="font-size:12.5px;line-height:1.5;color:#8e8e96">Required by your organization</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;max-width:380px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.07em;padding:4px 6px;border-radius:3px;background:#eaf3ee;color:#2f6b4f">ENABLED</span>
+                <span style="font-size:13px;color:#5c5c63">Authenticator app</span>
+              </div>
+              <span style="font-size:12.5px;font-weight:500;color:#3d3a4f">Manage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">9.2 — ADD A PASSWORD (GOOGLE-ONLY ACCOUNT)</span></sc-if>
+      <div style="width:820px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(24,24,27,.06)">
+        <div style="height:56px;border-bottom:1px solid #e8e8ea;display:flex;align-items:center;gap:24px;padding:0 28px">
+          <span style="font-size:15px;font-weight:500">Account</span>
+          <div style="display:flex;gap:2px;margin-left:12px">
+            <div style="padding:8px 12px;font-size:13px;color:#8e8e96">Profile</div>
+            <div style="padding:8px 12px;font-size:13px;font-weight:500;border-bottom:2px solid #3d3a4f;margin-bottom:-18px">Security</div>
+            <div style="padding:8px 12px;font-size:13px;color:#8e8e96">Notifications</div>
+            <div style="padding:8px 12px;font-size:13px;color:#8e8e96">Billing</div>
+          </div>
+        </div>
+        <div style="padding:32px;display:flex;flex-direction:column;gap:32px">
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:40px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:14px;font-weight:500">Sign-in method</span>
+              <span style="font-size:12.5px;line-height:1.5;color:#8e8e96">How you access this account</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;max-width:380px">
+              <div style="border:1px solid #e2e2e5;border-radius:8px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;background:#fafafa">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:26px;height:26px;border-radius:6px;border:1px solid #e2e2e5;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#5c5c63">G</div>
+                  <div style="display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:13px;font-weight:500">Google</span>
+                    <span style="font-size:11.5px;color:#8e8e96">marcus@oyelaran.co</span>
+                  </div>
+                </div>
+                <span style="font:500 9.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.07em;padding:4px 6px;border-radius:3px;background:#eaf3ee;color:#2f6b4f">CONNECTED</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:40px;padding-top:28px;border-top:1px solid #e8e8ea">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:14px;font-weight:500">Password</span>
+              <span style="font-size:12.5px;line-height:1.5;color:#8e8e96">Not set</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;max-width:380px">
+              <p style="margin:0;font-size:13px;line-height:1.55;color:#5c5c63">You sign in with Google, so there's no current password to confirm. Adding one lets you sign in directly — useful if your organization revokes Google access mid-deal.</p>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:12.5px;font-weight:500">New password</span>
+                <div style="height:36px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:13px;color:#a8a8b0">At least 12 characters</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:12.5px;font-weight:500">Confirm password</span>
+                <div style="height:36px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:13px;color:#a8a8b0">Re-enter password</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding-top:4px">
+                <div style="height:34px;padding:0 16px;background:#3d3a4f;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#fff">Add password</div>
+                <span style="font-size:12.5px;color:#5c5c63">We'll email you to confirm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ annotations }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;max-width:820px;font-size:12.5px;line-height:1.55;color:#5c5c63"><span style="font:500 11px Helvetica,Arial,sans-serif;letter-spacing:.06em;color:#c0392b">NOTE</span>&nbsp;&nbsp;Same section, one fewer field — and the copy explains why the “current password” field is missing rather than leaving a suspicious gap.</p>
+      </sc-if>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ frameLabels }}" hint-placeholder-val="{{ true }}"><span style="font:500 11px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#8e8e96">9.3 — DANGER ZONE: RESTING → CONFIRMATION</span></sc-if>
+      <div style="display:flex;gap:24px;align-items:flex-start">
+        <div style="width:560px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;padding:28px;box-shadow:0 1px 3px rgba(24,24,27,.06);display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#c0392b">DANGER ZONE</span>
+            <span style="font-size:12.5px;color:#8e8e96">Irreversible actions</span>
+          </div>
+          <div style="border:1px solid #f0d8d4;border-radius:8px;overflow:hidden">
+            <div style="padding:16px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <span style="font-size:13.5px;font-weight:500">Delete account</span>
+                <span style="font-size:12.5px;line-height:1.5;color:#5c5c63">Removes your profile, 4 data rooms and 2,150 documents. Rooms you own become inaccessible to all 31 collaborators.</span>
+              </div>
+              <div style="height:34px;padding:0 14px;flex:none;border:1px solid #c0392b;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#c0392b">Delete account</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="width:560px;background:#fff;border:1px solid #e2e2e5;border-radius:10px;padding:28px;box-shadow:0 1px 3px rgba(24,24,27,.06);display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <span style="font:500 10.5px/1 Helvetica,Arial,sans-serif;letter-spacing:.1em;color:#c0392b">DANGER ZONE</span>
+            <span style="font-size:12.5px;color:#8e8e96">Irreversible actions</span>
+          </div>
+          <div style="border:1.5px solid #c0392b;border-radius:8px;overflow:hidden">
+            <div style="padding:16px;background:#fdf3f1;border-bottom:1px solid #f0d8d4;display:flex;flex-direction:column;gap:7px">
+              <span style="font-size:13.5px;font-weight:500;color:#9c2d21">This cannot be undone</span>
+              <div style="display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:#8a3226;line-height:1.5">
+                <span>· 4 data rooms and 2,150 documents are deleted</span>
+                <span>· 31 collaborators lose access immediately</span>
+                <span>· Audit logs are retained for 7 years per your plan</span>
+              </div>
+            </div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <span style="font-size:12.5px;color:#5c5c63">Type <strong style="font-weight:500;color:#18181b">anna@harlanco.com</strong> to confirm</span>
+                <div style="height:36px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:13px;color:#a8a8b0">Enter your account email</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <div style="width:15px;height:15px;flex:none;margin-top:1px;border:1.5px solid #d4d4d8;border-radius:3px"></div>
+                <span style="font-size:12.5px;line-height:1.45;color:#5c5c63">I understand that collaborators on rooms I own will lose access.</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;padding-top:2px">
+                <div style="height:34px;padding:0 14px;border:1px solid #e2e2e5;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500">Cancel</div>
+                <div style="height:34px;padding:0 16px;background:#eddad6;border-radius:8px;display:flex;align-items:center;font-size:13px;font-weight:500;color:#c39a92">Permanently delete</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ annotations }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;max-width:1144px;font-size:12.5px;line-height:1.55;color:#5c5c63"><span style="font:500 11px Helvetica,Arial,sans-serif;letter-spacing:.06em;color:#c0392b">NOTE</span>&nbsp;&nbsp;The confirm button stays disabled until both the typed email matches and the checkbox is ticked. Expanding in place rather than opening a modal keeps the consequences and the input on one surface.</p>
+      </sc-if>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;frameLabels&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Spec doc&quot;},&quot;annotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Spec doc&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      frameLabels: this.props.frameLabels ?? true,
+      annotations: this.props.annotations ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

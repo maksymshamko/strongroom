@@ -1,0 +1,30 @@
+{
+  "name": "dataroom",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "build": "pnpm --filter @dataroom/contracts build && pnpm --filter @dataroom/api build && pnpm --filter @dataroom/web build",
+    "test": "pnpm --filter @dataroom/contracts build && pnpm -r test",
+    "lint": "pnpm -r lint",
+    "db:up": "docker compose up -d db",
+    "db:migrate": "dotenv -e .env -- pnpm --filter @dataroom/api exec prisma migrate dev",
+    "db:seed": "dotenv -e .env -- pnpm --filter @dataroom/api exec tsx prisma/seed.ts",
+    "dev": "pnpm --filter @dataroom/contracts build && pnpm --parallel --filter @dataroom/api --filter @dataroom/web dev"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^11.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma",
+      "@swc/core",
+      "esbuild",
+      "sharp"
+    ]
+  }
+}

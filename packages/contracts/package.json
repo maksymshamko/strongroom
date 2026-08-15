@@ -1,0 +1,19 @@
+{
+  "name": "@dataroom/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "echo \"contracts are exercised by the api and web suites\" && exit 0"
+  },
+  "dependencies": { "zod": "^3.24.1" },
+  "devDependencies": { "typescript": "^5.7.3" }
+}

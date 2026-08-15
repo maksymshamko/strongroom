@@ -1,0 +1,27 @@
+# Local development database only — not part of the deployed stack (spec 004 §2.1).
+# Production uses Supabase; see docker-compose.yml for what actually ships.
+#
+#   docker compose -f docker-compose.dev.yml up -d
+#
+# Exposes 5433 so it cannot collide with a Postgres already installed on the host.
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: strongroom-dev-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dataroom
+      POSTGRES_PASSWORD: dataroom
+      POSTGRES_DB: dataroom
+    ports: ['5433:5432']
+    volumes:
+      - dev-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U dataroom']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  dev-db:

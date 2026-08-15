@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+
+/*
+ * §11.1 — the design system from cd/Strongroom Data Room.dc.html.
+ * Rules carried over verbatim from the design's own RULES block:
+ * 4px base grid; 8px radius (10px on dialogs); 44px list rows;
+ * accent is action only, never decoration; red only where data is destroyed.
+ */
+@theme {
+  --color-canvas: #efeff0;
+  --color-surface: #ffffff;
+  --color-surface-2: #fafafa;
+  --color-surface-3: #f4f4f5;
+  --color-line: #e8e8ea;
+  --color-line-2: #e2e2e5;
+  --color-ink-1: #18181b;
+  --color-ink-2: #5c5c63;
+  --color-ink-3: #8e8e96;
+  --color-ink-4: #a8a8b0;
+  --color-accent: #3d3a4f;
+  --color-accent-hover: #2b293a;
+  --color-accent-soft: #f0eff4;
+  --color-accent-line: #d8d5e1;
+  --color-done: #2f6b4f;
+  --color-pending: #8a5a12;
+  --color-danger: #c0392b;
+  --color-danger-soft: #fdf3f1;
+  --color-danger-line: #f0d8d4;
+
+  --font-sans: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+
+  --radius-card: 8px;
+  --radius-dialog: 10px;
+  --radius-chip: 3px;
+
+  --spacing-row: 44px;
+}
+
+/*
+ * spec 003 §3.3 — dark palette. Roles are preserved rather than inverted ad hoc:
+ * canvas stays behind surface, accent stays action-only, danger stays reserved
+ * for destruction. Accent flips to a light lilac because a dark accent on a dark
+ * surface would fail contrast on the one thing that must read as actionable.
+ */
+:root[data-theme='dark'] {
+  --color-canvas: #141417;
+  --color-surface: #1c1c20;
+  --color-surface-2: #212127;
+  --color-surface-3: #26262c;
+  --color-line: #2e2e35;
+  --color-line-2: #35353d;
+  --color-ink-1: #f4f4f5;
+  --color-ink-2: #b4b4bd;
+  --color-ink-3: #8e8e96;
+  --color-ink-4: #6e6e78;
+  --color-accent: #b3aed0;
+  --color-accent-hover: #c7c2e0;
+  --color-accent-soft: #2b2937;
+  --color-accent-line: #3d3a4f;
+  --color-done: #6fbf95;
+  --color-pending: #d9a441;
+  --color-danger: #e8705f;
+  --color-danger-soft: #2a1c1a;
+  --color-danger-line: #4a2c27;
+
+  color-scheme: dark;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-canvas);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink-1);
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+/* 11 caps / .09em — the design's label style, used for every eyebrow label. */
+.label-caps {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.screen-title {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.row-primary {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.row-meta {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-ink-2);
+}
+
+/* Focus is visible everywhere — diligence tools get keyboard-driven. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

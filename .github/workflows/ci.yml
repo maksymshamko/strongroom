@@ -1,0 +1,156 @@
+# spec 004 §1 — tests on every pull request and every push to main.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '22'
+  PNPM_VERSION: '10.33.0'
+
+jobs:
+  check:
+    name: Typecheck
+    runs-on: ubuntu-latest
+
+    # `prisma validate` resolves env("DATABASE_URL") from the schema even though
+    # this job never connects, so the variable has to be present.
+    env:
+      DATABASE_URL: postgresql://unused:unused@127.0.0.1:5432/unused?schema=public
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Both apps consume contracts from dist, so it has to exist first.
+      - run: pnpm --filter @dataroom/contracts build
+      - run: pnpm --filter @dataroom/api exec prisma generate
+      - run: pnpm --filter @dataroom/api exec prisma validate
+
+      - name: Typecheck every workspace
+        run: pnpm -r lint
+
+  test:
+    name: Unit + integration
+    runs-on: ubuntu-latest
+
+    # The integration suite is the main guard on access control (002 §12), so it
+    # runs against a real Postgres rather than a stub.
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: dataroom
+          POSTGRES_PASSWORD: dataroom
+          POSTGRES_DB: dataroom_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U dataroom -d dataroom_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      DATABASE_URL: postgresql://dataroom:dataroom@127.0.0.1:5432/dataroom_test?schema=public
+      TEST_DATABASE_URL: postgresql://dataroom:dataroom@127.0.0.1:5432/dataroom_test?schema=public
+      JWT_SECRET: ci-secret-ci-secret-ci-secret-32ch
+      WEB_URL: http://localhost:3000
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @dataroom/contracts build
+      - run: pnpm --filter @dataroom/api exec prisma generate
+      - run: pnpm --filter @dataroom/api exec prisma migrate deploy
+
+      - run: pnpm --filter @dataroom/api test
+
+  e2e:
+    name: Playwright
+    runs-on: ubuntu-latest
+    needs: [check]
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: dataroom
+          POSTGRES_PASSWORD: dataroom
+          POSTGRES_DB: dataroom
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U dataroom -d dataroom"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      DATABASE_URL: postgresql://dataroom:dataroom@127.0.0.1:5432/dataroom?schema=public
+      JWT_SECRET: ci-secret-ci-secret-ci-secret-32ch
+      WEB_URL: http://localhost:3000
+      API_PORT: '3001'
+      # §1.2 — no Supabase, no Resend, no Google. The fallback adapters make a
+      # credential-free run a real run, uploads included.
+      NEXT_PUBLIC_API_URL: http://localhost:3001/api/v1
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @dataroom/contracts build
+      - run: pnpm --filter @dataroom/api exec prisma generate
+      - run: pnpm --filter @dataroom/api exec prisma migrate deploy
+      - run: pnpm --filter @dataroom/api exec tsx prisma/seed.ts
+
+      - run: pnpm --filter @dataroom/api build
+      - run: pnpm --filter @dataroom/web build
+
+      - run: pnpm --filter @dataroom/web exec playwright install --with-deps chromium
+
+      - name: Boot both apps
+        run: |
+          node apps/api/dist/main.js > /tmp/api.log 2>&1 &
+          pnpm --filter @dataroom/web exec next start -p 3000 > /tmp/web.log 2>&1 &
+          npx --yes wait-on -t 90000 http://localhost:3001/api/v1/health http://localhost:3000/login
+
+      - run: pnpm --filter @dataroom/web e2e
+
+      - name: Server logs on failure
+        if: failure()
+        run: tail -n 100 /tmp/api.log /tmp/web.log
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: apps/web/test-results/
+          retention-days: 7

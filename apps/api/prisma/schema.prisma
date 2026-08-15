@@ -1,0 +1,180 @@
+// Data room schema — specs/002.data-room-mvp.md §2.1
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum NodeType {
+  DATAROOM
+  FOLDER
+  FILE
+  TRASH // spec 003 §2.1 — one per user, created lazily, never deleted
+}
+
+enum ShareMode {
+  PUBLIC_LINK
+  PERMISSIONED
+}
+
+enum ShareRole {
+  VIEWER
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique // stored lower-cased (§3.3)
+  name         String
+  passwordHash String? // null for Google-only accounts
+  googleId     String?  @unique
+  createdAt    DateTime @default(now())
+
+  nodes         Node[]          @relation("NodeOwner")
+  grants        ShareGrant[]
+  fileVersions  FileVersion[]
+  createdShares Share[]         @relation("ShareCreator")
+  uploads       PendingUpload[]
+  accessLogs    ShareAccessLog[]
+}
+
+model Node {
+  id         String    @id @default(uuid())
+  parentId   String?
+  type       NodeType
+  name       String
+  path       String // materialized path, §2.2 — "/rootId/.../selfId/"
+  dataRoomId String
+  size       BigInt    @default(0)
+  itemCount  Int       @default(0)
+  mimeType   String?
+  ownerId    String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  // spec 003 §2.1 — set on the trashed node itself, never on its descendants
+  deletedAt        DateTime?
+  previousParentId String?
+  previousName     String?
+  deletedFromLabel String?
+
+  parent   Node?           @relation("NodeTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children Node[]          @relation("NodeTree")
+  owner    User            @relation("NodeOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  versions FileVersion[]
+  shares   Share[]
+  uploads  PendingUpload[]
+
+  @@unique([parentId, name]) // §6.1
+  @@index([parentId, type, name])
+  @@index([deletedAt])
+  @@index([dataRoomId])
+  @@index([path])
+  @@index([ownerId, type])
+}
+
+model FileVersion {
+  id            String   @id @default(uuid())
+  nodeId        String
+  storageKey    String   @unique // uuid object key, never the filename
+  size          BigInt
+  mimeType      String
+  checksum      String? // sha-256 hex, client-reported, advisory
+  versionNumber Int
+  createdAt     DateTime @default(now())
+  createdById   String
+
+  node      Node @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  createdBy User @relation(fields: [createdById], references: [id], onDelete: Cascade)
+
+  @@unique([nodeId, versionNumber])
+  @@index([nodeId, versionNumber(sort: Desc)])
+}
+
+model Share {
+  id          String    @id @default(uuid())
+  nodeId      String
+  mode        ShareMode
+  token       String?   @unique // set iff mode = PUBLIC_LINK
+  createdById String
+  createdAt   DateTime  @default(now())
+  revokedAt   DateTime?
+
+  node      Node             @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  createdBy User             @relation("ShareCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  grants    ShareGrant[]
+  logs      ShareAccessLog[]
+
+  @@index([nodeId, revokedAt])
+}
+
+model ShareGrant {
+  id         String    @id @default(uuid())
+  shareId    String
+  email      String // lower-cased
+  userId     String? // null until an account with that email exists (§3.5)
+  role       ShareRole @default(VIEWER)
+  acceptedAt DateTime?
+  createdAt  DateTime  @default(now())
+  revokedAt  DateTime?
+
+  share Share @relation(fields: [shareId], references: [id], onDelete: Cascade)
+  user  User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([shareId, email])
+  @@index([email, revokedAt])
+  @@index([userId, revokedAt])
+}
+
+model ShareAccessLog {
+  id           String   @id @default(uuid())
+  shareId      String
+  nodeId       String?
+  viewerUserId String?
+  anonId       String?
+  viewedAt     DateTime @default(now())
+
+  share  Share @relation(fields: [shareId], references: [id], onDelete: Cascade)
+  viewer User? @relation(fields: [viewerUserId], references: [id], onDelete: SetNull)
+
+  @@index([shareId, viewedAt])
+}
+
+/// §7.1 — server-side record of what an upload promised, so `complete` cannot be spoofed.
+model PendingUpload {
+  id                String   @id @default(uuid())
+  parentId          String
+  name              String
+  declaredSize      BigInt
+  declaredMimeType  String
+  storageKey        String   @unique
+  createdById       String
+  createdAt         DateTime @default(now())
+  expiresAt         DateTime
+
+  parent    Node @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  createdBy User @relation(fields: [createdById], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt])
+}
+
+/// §10.3 — a storage delete that failed is recorded, never lost silently.
+model OrphanedObject {
+  id         String   @id @default(uuid())
+  storageKey String
+  failedAt   DateTime @default(now())
+  attempts   Int      @default(1)
+  lastError  String?
+
+  @@index([failedAt])
+}
+
+/// §3.3 — failed login attempts, for the per-email rate limit.
+model LoginAttempt {
+  id        String   @id @default(uuid())
+  email     String
+  attemptedAt DateTime @default(now())
+
+  @@index([email, attemptedAt])
+}
