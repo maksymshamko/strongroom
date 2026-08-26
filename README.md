@@ -17,6 +17,7 @@ people by email.
   - [Demo user](#demo-user)
   - [Run it locally (no cloud accounts needed)](#run-it-locally-no-cloud-accounts-needed)
   - [Run it in production (Docker + nginx)](#run-it-in-production-docker--nginx)
+    - [Row-level security on the Supabase database](#row-level-security-on-the-supabase-database)
     - [Build-time versus run-time environment](#build-time-versus-run-time-environment)
     - [Why both apps sit on one origin](#why-both-apps-sit-on-one-origin)
   - [Architecture](#architecture)
@@ -143,6 +144,38 @@ docker compose --env-file .env up -d --build
 Then paste `deploy/nginx/strongroom.conf` into your system nginx
 (`/etc/nginx/sites-available/`, symlinked into `sites-enabled`) and run
 `nginx -t && systemctl reload nginx`.
+
+### Row-level security on the Supabase database
+
+Nothing reaches the tables over Supabase's REST/realtime API. The browser talks
+only to this API, and this API talks to Postgres through Prisma over a direct
+connection — so `anon` and `authenticated`, the roles PostgREST assumes for
+anything holding a publishable key, should have no access at all.
+
+Migration `20260826090000_enable_row_level_security` states that:
+
+- RLS on for every table in `public`, so a leaked publishable key sees no rows;
+- table, sequence and function privileges revoked from `anon` and
+  `authenticated`, including for tables Prisma creates later, so the refusal
+  happens at the privilege check and not only at RLS;
+- one `service_role_full_access` policy per table, which grants nothing new
+  (`service_role` bypasses RLS regardless) but records who these tables are for
+  and clears Supabase's "RLS enabled, no policy" advisor notice.
+
+Two things it deliberately does not do:
+
+- **No `FORCE ROW LEVEL SECURITY`.** Prisma connects as the role that owns
+  these tables, and an owner is exempt from its own policies. Forcing it would
+  apply them to the API's own connection and every query would return zero
+  rows. If you ever point `DATABASE_URL` at a role that neither owns the tables
+  nor holds `BYPASSRLS`, that role needs policies of its own — deny-by-default
+  will otherwise silently return nothing.
+- **No Storage policies.** Uploads and downloads go through signed URLs minted
+  with the `service_role` key, which bypasses storage RLS; a policy would only
+  widen access. See the bucket setup above.
+
+A table added by a future migration is not covered automatically — Postgres has
+no default for this — so enable RLS on it in the migration that creates it.
 
 ### Build-time versus run-time environment
 
